@@ -21,7 +21,9 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        //
+        $records = Room::paginate(5);
+        return view('editRoom')
+            ->with('records',$records);
     }
 
     /**
@@ -29,9 +31,15 @@ class RoomsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(RoomDataRequest $request, $id)
     {
-        //
+        $Record = new Room();
+        $Record->branch_id = $request->get('branch_id');
+        $Record->name = $request->get('name');
+        $Record->capacity = $request->get('capacity');
+        $Record->save();
+        Alert::success('New record added successfully')->flash();
+        return redirect()->back()->with('alerts', Alert::all());
     }
 
     /**
@@ -42,16 +50,7 @@ class RoomsController extends Controller
      */
     public function store(RoomDataRequest $request, $id)
     {
-        if ($id == 0) {
-            $Record = new Room();
-            $Record->branch_id = $request->get('branch_id');
-            $Record->name = $request->get('name');
-            $Record->capacity = $request->get('capacity');
-            $Record->save();
-            //$request->session()->flash('flash_message','New record added successfully');
-            Alert::success('New record added successfully')->flash();
-        }
-        else{
+
             $record = Room::find($id); 
             $record->branch_id = $request->get('branch_id');
             $record->name = $request->get('name');
@@ -62,7 +61,6 @@ class RoomsController extends Controller
             //return view('alerts');
             //Alert::success('You have successfully logged in')->flash();
             //$request->session()->flash('flash_message', 'Data updated successfully!');
-        }
         return redirect()->back()->with('alerts', Alert::all());
     }
 
@@ -76,8 +74,6 @@ class RoomsController extends Controller
     {
         if ($id<>0) {
             $record = Room::find($id);
-            //$record->branch_id->readonly = 'true';
-            //->where('name', 'John')->value('email')
             $branch_lists = Branch::where('id',$record->branch_id)->pluck('name', 'id');
         }
         else
@@ -90,32 +86,9 @@ class RoomsController extends Controller
             //$record->branch_id->readonly = 'false';
             $branch_lists = Branch::pluck('name', 'id');
         }
-        //return $branch_lists;
         return view('newRoom') 
                     ->with('branch_lists', $branch_lists)
                     ->with('record',$record);
-    }
-
-    public function showEdit(){
-
-         $records=Room::all();
-
-         return view('editRoom')->with('records',$records);
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // find the aliens record of given id
-        $record = Room::find($id);
-        // show the edit form and pass the aliens info to it
-        return View ('editRoom_form')->with('record',$record); 
     }
 
     /**
@@ -134,13 +107,6 @@ class RoomsController extends Controller
         $record->save();
         $request->session()->flash('flash_message', 'Data updated successfully!');
         return redirect()->back();
-    }
-
-    public function showAll()
-    {
-        $records=Room::all();
-        return view('viewRoom')
-            ->with('records',$records);
     }
 
      public function showNew($id)
@@ -184,7 +150,7 @@ class RoomsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function report($id)
     {

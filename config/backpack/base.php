@@ -12,17 +12,17 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Euro',
+    'project_name' => 'Backpack',
 
     // Menu logos
     'logo_lg'   => '<b>Back</b>pack',
     'logo_mini' => '<b>B</b>p',
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'Softphile Solution',
+    'developer_name' => 'Cristian Tabacitu',
 
     // Developer website. Link in footer.
-    'developer_link' => 'http://softphile.ro',
+    'developer_link' => 'http://tabacitu.ro',
 
     // Show powered by Laravel Backpack in the footer?
     'show_powered_by' => true,

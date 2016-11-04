@@ -14,11 +14,11 @@
 <div class="container-fluid">
 	 	<div class="panel panel-default">
 	 		<div class="panel-heading">
-	 			<a class="btn btn-large btn-success" href="{{url('/newRoom/0')}}">New</a>
+	 			<a class="btn btn-large btn-success" href="{{url('/editRoom/0')}}">New</a>
 	 		</div>
 	 		<div class="panel-body">
 	 			<div class="table-responsive">
-					 <table id="myTable" class="table table-striped" >  
+					 <table id="myTable11" class="table table-striped" >  
 					 <thead>
 					 <tr>
 						 <th>Branch</th>
@@ -30,16 +30,18 @@
 						 <tbody>
 						 @foreach($records as $key=>$record)
 						 <tr>
-							 <td>{{$record->branch->name}}</td>
+							 <td>{{$record->name}}</td>
 							 <td>{{$record->name}}</td>
 							 <td>{{$record->capacity}}</td>
-							 <td><a class="btn btn-large btn-success" href="{{ URL::to('newRoom/'.$record->id) }}">Edit</a>
+							 <td><a class="btn btn-large btn-success" href="{{ URL::to('editRoom/'.$record->id) }}">Edit</a>
 							 <a class="btn btn-large btn-success" href="{{ URL::to('deleteRoom/'.$record->id) }}">Delete</a>
 							 <a class="btn btn-large btn-success" href="{{ URL::to('reportRoom/'.$record->id) }}">Report</a></td>
 						 </tr>
 						 @endforeach
 						 </tbody>
+						 {{ $records->links() }}
 					 </table>
+
 	 			</div>
 	 		</div>
 	 	</div>

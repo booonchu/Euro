@@ -18,7 +18,13 @@
  		</div>
  		<div class="panel-body">
 
-			 <form role="form" method="POST" action="{{ url('/saveRoom',$record->id) }}">
+			 <form role="form" method="POST" action="
+			 	@if ($record->id === 0)
+			 		{{ url('/createRoom',$record->id) }}
+			 	@else
+			 		{{ url('/updateRoom',$record->id) }}
+				@endif
+			 ">
 			 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			 	<div class="form-group">
 			 		<label class="col-md-3 control-label">Branch:</label>
