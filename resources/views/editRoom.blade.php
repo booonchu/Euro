@@ -22,15 +22,15 @@
 					 <thead>
 					 <tr>
 						 <th>Branch</th>
-						 <th>Room Name</th>
-						 <th>Capacity</th>
-						 <th>Action</th>
+						 <th>{{trans('view.roomname')}}</th>
+						 <th>{{trans('view.capacity')}}</th>
+						 <th>{{trans('view.action')}}</th>
 					 </tr>
 					 </thead>
 						 <tbody>
 						 @foreach($records as $key=>$record)
 						 <tr>
-							 <td>{{$record->name}}</td>
+							 <td>{{$record->branch->name}}</td>
 							 <td>{{$record->name}}</td>
 							 <td>{{$record->capacity}}</td>
 							 <td><a class="btn btn-large btn-success" href="{{ URL::to('editRoom/'.$record->id) }}">Edit</a>
@@ -39,9 +39,8 @@
 						 </tr>
 						 @endforeach
 						 </tbody>
-						 {{ $records->links() }}
 					 </table>
-
+					 {{ $records->links('vendor.pagination.basepagination') }}
 	 			</div>
 	 		</div>
 	 	</div>
