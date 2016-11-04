@@ -18,10 +18,10 @@
 	 		</div>
 	 		<div class="panel-body">
 	 			<div class="table-responsive">
-					 <table id="myTable11" class="table table-striped" >  
+					 <table class="table table-striped" >  
 					 <thead>
 					 <tr>
-						 <th>Branch</th>
+						 <th><a herf="www.google.com" onClick="alert('recursiveEncoded');">Branch</a></th>
 						 <th>{{trans('view.roomname')}}</th>
 						 <th>{{trans('view.capacity')}}</th>
 						 <th>{{trans('view.action')}}</th>

@@ -11,6 +11,7 @@ use App\Http\Requests\RoomDataRequest;
 use TCPDF;
 use Illuminate\Http\Response;
 use Prologue\Alerts\Facades\Alert;
+use Illuminate\Support\Facades\Input;
 
 class RoomsController extends Controller
 {
@@ -21,7 +22,15 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        $records = Room::paginate(5);
+        //Get orderby parameters
+        $sort = Input::get('sortcolumn', 'name');
+        $type = Input::get('sorttype', 'asc');
+
+        $records = Room::orderBy($sort, $type)->paginate(10);
+
+        $records->appends(['sortcolumn' => $sort,
+                           'sorttype'=> $type,]) ->render();
+
         return view('editRoom')
             ->with('records',$records);
     }
