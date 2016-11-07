@@ -11,27 +11,49 @@
     </section>
 @endsection
 @section('content')
-<div class="container-fluid">
-	 	<div class="panel panel-default">
-	 		<div class="panel-body">
-	 			{!! Form::open(['route' => ['rooms.index'],'method'=>'GET'] ) !!}
-	 			<div class="form-group">
-			 		<label class="col-md-3 control-label">{{trans('view.roomname')}}:</label>
-			 		<div class="col-md-9">
-			 			{{ Form::text('name',$search['name'], ['class' => 'form-control']) }} </br>
-					</div>
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+           <div class="box-header">
+              <h3 class="box-title">Search</h3>
+           </div>
+           <!-- /.box-header -->
+           {!! Form::open(['route' => ['rooms.index'],'method'=>'GET','class' => 'form-horizontal'] ) !!}
+           <div class="box-body">
+           		<div class="form-group">
+                  <label for="name" class='col-sm-2 control-label'>{{trans('view.roomname')}}</label>
+                  <div class="col-sm-10">
+                    	{{ Form::text('name',$search['name'], ['class' => 'form-control','placeholder'=> trans('view.roomname')]) }}
+                  </div>
+                  
+                  <!--<input id="name" class="form-control" placeholder="{{trans('view.roomname')}}">-->
 			 	</div>
-			 	<div class="form-group">
-			 		<div class="col-md-6 col-md-offset-6">
-			 			<button type="submit" class="btn btn-success btn-block">{{trans('view.search') }}</button>
-			 		</div>
-			 	</div>
-			 	{!! Form::close()!!}
-	 			<div class="table-responsive">
-	 				 <div>
-	 				 	<a class="btn btn-large btn-success" href="{{ route('rooms.create')}}">{{trans('view.create')}}</a>
-	 				 </div>
-					 <table class="table table-striped table-bordered">
+			 	<div class="box-footer">
+                	<button class="btn btn-info pull-right" type="submit">{{trans('view.search')}}</button>
+                	<a class="btn btn-info pull-right" href="{{ route('rooms.create')}}">{{trans('view.create')}}</a>
+              	</div>
+           </div>
+           {!! Form::close()!!}
+          <!-- /.box -->
+        </div>
+      </div>
+</div>
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Result</h3>
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <div class="input-group-btn">
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              	<table class="table table-hover">
 					 <thead>
 					 <tr>
 					 	 <th>Branch</th>
@@ -57,12 +79,13 @@
 						 @endforeach
 
 						 </tbody>
-					 </table>
-	 			</div>
-	 			<div>
-					{{ $records->links('vendor.pagination.basepagination') }}
-				</div>
-	 		</div>
-	 	</div>
+				</table>
+            </div>
+            <!-- /.box-body -->
+            {{ $records->links('vendor.pagination.basepagination') }}
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
 </div>
 @endsection

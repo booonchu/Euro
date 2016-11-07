@@ -1,5 +1,6 @@
 @if ($paginator->hasPages())
-    <ul class="pagination">
+<div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="disabled"><span>{{trans('pagination.previous')}}</span></li>
@@ -33,4 +34,5 @@
             <li class="disabled"><span>{{trans('pagination.next')}}</span></li>
         @endif
     </ul>
+</div>
 @endif
