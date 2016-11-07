@@ -25,14 +25,20 @@ class RoomsController extends Controller
         //Get orderby parameters
         $sort = Input::get('sortcolumn', 'name');
         $type = Input::get('sorttype', 'asc');
-
-        $records = Room::orderBy($sort, $type)->paginate(10);
+        //Get search param
+        $name = Input::get('name', '');
+        $search = array('name'=> $name);
+        
+        $records = Room::where('name', 'like', '%'.$name.'%')->orderBy($sort, $type)->paginate(5);
 
         $records->appends(['sortcolumn' => $sort,
-                           'sorttype'=> $type,]) ->render();
-
-        return view('editRoom')
-            ->with('records',$records);
+                           'sorttype'=> $type,
+                           'name'=> $name,
+                           ]) ->render();
+        //$records = Room::paginate(5);
+        return view('rooms.index')
+            ->with('records',$records)
+            ->with('search',$search);
     }
 
     /**
@@ -40,15 +46,20 @@ class RoomsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(RoomDataRequest $request, $id)
+    public function create()
     {
-        $Record = new Room();
-        $Record->branch_id = $request->get('branch_id');
-        $Record->name = $request->get('name');
-        $Record->capacity = $request->get('capacity');
-        $Record->save();
-        Alert::success('New record added successfully')->flash();
-        return redirect()->back()->with('alerts', Alert::all());
+        $record = new Room();
+            $record->branch_id = '';
+            $record->name = '';
+            $record->capacity = '';
+            $record->id = 0;
+            //$record->branch_id->readonly = 'false';
+            $branch_lists = Branch::pluck('name', 'id');
+
+        return view('rooms.edit') 
+                    ->with('branch_lists', $branch_lists)
+                    ->with('record',$record)
+                    ->with('mode','I');//Sent mode 'U' as Edit mode.
     }
 
     /**
@@ -57,20 +68,16 @@ class RoomsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomDataRequest $request, $id)
+    public function store(RoomDataRequest $request)
     {
-
-            $record = Room::find($id); 
-            $record->branch_id = $request->get('branch_id');
-            $record->name = $request->get('name');
-            $record->capacity = $request->get('capacity');
-            $record->save();
-            Alert::success('Data updated successfully!')->flash();
-            //Alert::add('error', 'Error message');
-            //return view('alerts');
-            //Alert::success('You have successfully logged in')->flash();
-            //$request->session()->flash('flash_message', 'Data updated successfully!');
-        return redirect()->back()->with('alerts', Alert::all());
+        $Record = new Room();
+            $Record->branch_id = $request->branch_id;
+            $Record->name = $request->name;
+            $Record->capacity = $request->capacity;
+            $Record->save();
+            Alert::success('New record added successfully')->flash();
+            //$request->session()->flash('flash_message','New record added successfully');
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -81,23 +88,30 @@ class RoomsController extends Controller
      */
     public function show($id)
     {
-        if ($id<>0) {
-            $record = Room::find($id);
-            $branch_lists = Branch::where('id',$record->branch_id)->pluck('name', 'id');
-        }
-        else
-        {
-            $record = new Room();
-            $record->branch_id = '';
-            $record->name = '';
-            $record->capacity = '';
-            $record->id = 0;
-            //$record->branch_id->readonly = 'false';
-            $branch_lists = Branch::pluck('name', 'id');
-        }
-        return view('newRoom') 
+        $record = Room::find($id);
+        $branch_lists = Branch::where('id',$record->branch_id)->pluck('name', 'id');
+        
+        return view('rooms.show') 
                     ->with('branch_lists', $branch_lists)
                     ->with('record',$record);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        // find the aliens record of given id
+        $record = Room::find($id);
+        $branch_lists = Branch::where('id',$record->branch_id)->pluck('name', 'id');
+        
+        return view('rooms.edit') 
+                    ->with('branch_lists', $branch_lists)
+                    ->with('record',$record)
+                    ->with('mode','U');//Sent mode 'U' as Edit mode.
     }
 
     /**
@@ -114,31 +128,10 @@ class RoomsController extends Controller
         $record->name = $request->get('name');
         $record->capacity = $request->get('capacity');
         $record->save();
-        $request->session()->flash('flash_message', 'Data updated successfully!');
-        return redirect()->back();
+        Alert::success('Data updated successfully!')->flash();
+        //$request->session()->flash('flash_message', 'Data updated successfully!');
+        return redirect()->route('rooms.index');
     }
-
-     public function showNew($id)
-     {
-        if ($id<>0) {
-            $record = Room::find($id);
-            //$record->branch_id->readonly = 'true';
-        }
-        else
-        {
-            $record = new Room();
-            $record->branch_id = '';
-            $record->name = '';
-            $record->capacity = '';
-            $record->id = 0;
-            //$record->branch_id->readonly = 'false';
-        }
-        $branch_lists = Branch::pluck('name', 'id');
-        return view('newRoom') 
-                    ->with('branch_lists', $branch_lists)
-                    ->with('record',$record);
-     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -146,20 +139,35 @@ class RoomsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
         $record = Room::find($id); 
         $record->delete();
         Alert::success('Record deleted successfully!')->flash();
         //$request->session()->flash('flash_message', 'Record deleted successfully!');
-        return redirect()->back()->with('alerts', Alert::all());
+        return redirect()->back();//route('rooms.index');
     }
+
+    /*public function report($id)
+    {
+        //require_once('tcpdf/include/tcpdf_include.php');
+        $pdf = new TCPDF();
+
+        $pdf->SetPrintHeader(false);
+        $pdf->SetPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->Text(90, 140, 'This is a test');
+        $filename = storage_path() . '/test.pdf';
+        $pdf->output($filename, 'F');
+
+        return response()->download($filename);
+    }*/
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
     public function report($id)
     {

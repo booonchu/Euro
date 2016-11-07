@@ -24,7 +24,8 @@
 
           <!-- ======================================= -->
           <li class="header">{{ trans('backpack::base.user') }}</li>
-          <li><a href="{{url('/editRoom')}}"><span>Rooms</span></a></li>
+          
+          <li><a href="{{ route('rooms.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.room') }}</span></a></li>
           <li><a href="{{ url(config('backpack.base.route_prefix').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>
         </ul>
       </section>

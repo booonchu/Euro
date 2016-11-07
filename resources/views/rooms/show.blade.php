@@ -2,11 +2,11 @@
 @section('header')
     <section class="content-header">
       <h1>
-        {{ trans('backpack::base.dashboard') }}<small>{{ trans('backpack::base.first_page_you_see') }}</small>
+        {{ trans('view.room') }}<small>{{ trans('view.room_detail') }}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url(config('backpack.base.route_prefix')) }}">{{ config('backpack.base.project_name') }}</a></li>
-        <li class="active">{{ trans('backpack::base.dashboard') }}</li>
+        <li class="active">{{trans('view.room')}}</li>
       </ol>
     </section>
 @endsection
@@ -18,13 +18,8 @@
  		</div>
  		<div class="panel-body">
 
-			 <form role="form" method="POST" action="
-			 	@if ($record->id === 0)
-			 		{{ url('/createRoom',$record->id) }}
-			 	@else
-			 		{{ url('/updateRoom',$record->id) }}
-				@endif
-			 ">
+ 			{!! Form::model($record,['route' => ['rooms.update',$record->id]] ) !!}
+			 <!--<form role="form" method="PUT" action="{{ route('rooms.update',$record->id) }}">-->
 			 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			 	<div class="form-group">
 			 		<label class="col-md-3 control-label">Branch:</label>
@@ -50,7 +45,8 @@
 			 			<button type="submit" class="btn btn-success btn-block"	value='Submit'>Submit</button>
 			 		</div>
 			 	</div>
-			 </form>
+			 <!--</form>-->
+			 {!! Form::close() !!}
  		</div> 
  	</div>
  </div>
