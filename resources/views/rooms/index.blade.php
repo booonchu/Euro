@@ -30,7 +30,6 @@
 			 	</div>
 			 	<div class="box-footer">
                 	<button class="btn btn-info pull-right" type="submit">{{trans('view.search')}}</button>
-                	<a class="btn btn-info pull-right" href="{{ route('rooms.create')}}">{{trans('view.create')}}</a>
               	</div>
            </div>
            {!! Form::close()!!}
@@ -42,11 +41,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Result</h3>
+              <a class="btn btn-info" href="{{ route('rooms.create')}}">{{trans('view.create')}}</a>
               <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
+                <div class="input-group input-group-sm">
                   <div class="input-group-btn">
-                 
+                    
                   </div>
                 </div>
               </div>
