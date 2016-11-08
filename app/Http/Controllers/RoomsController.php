@@ -75,6 +75,8 @@ class RoomsController extends Controller
             $Record->name = $request->name;
             $Record->capacity = $request->capacity;
             $Record->save();
+            //$request->session()->push('user.teams', 'developers');
+            $request->session()->regenerateToken();
             Alert::success('New record added successfully')->flash();
             //$request->session()->flash('flash_message','New record added successfully');
         return redirect()->route('rooms.index');

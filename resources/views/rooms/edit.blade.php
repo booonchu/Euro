@@ -16,48 +16,45 @@
     </section>
 @endsection
 @section('content')
-<div class="container-fluid">
- 	<div class="panel panel-default">
- 		<div class="panel-heading">
- 			<h3 class="panel-title">
- 			@if ($mode === 'U') {{trans('view.room_edit') }}
-        	@else {{trans('view.room_create') }}
-        	@endif</h3>
- 		</div>
- 		<div class="panel-body">
- 			@if ($mode === 'U') {!! Form::open(['route' => ['rooms.update',$record,$record->id],'method'=>'PUT'] ) !!} <!--{!! Form::model($record,['route' => ['rooms.update',$record->id],'method'=>'PUT'] ) !!}-->
-        	@else {!! Form::open(['route' => ['rooms.store',$record,$record->id],'method'=>'POST'] ) !!} <!--<form role="form" method="POST" action="{{ route('rooms.store') }}">-->
+		<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+              	@if ($mode === 'U') {{trans('view.room_edit') }}
+        		@else {{trans('view.room_create') }}
+        		@endif
+              </h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @if ($mode === 'U') {!! Form::open(['route' => ['rooms.update',$record,$record->id],'method'=>'PUT','class' =>'form-horizontal'] ) !!}
+        	@else {!! Form::open(['route' => ['rooms.store',$record,$record->id],'method'=>'POST','class' =>'form-horizontal'] ) !!} 
         	@endif
- 			<!--{!! Form::model($record,['route' => ['rooms.update',$record->id],'method'=>'PUT'] ) !!}-->
-			 <!--<form role="form" method="PUT" action="{{ route('rooms.update',$record->id) }}">
-			 	<input type="hidden" name="_token" value="{{ csrf_token() }}">-->
-			 	<div class="form-group">
-			 		<label class="col-md-3 control-label">Branch:</label>
-			 		<div class="col-md-9">
+              <div class="box-body">
+                <div class="form-group">
+			 		<label class="col-sm-2 control-label" for='branch_id'>Branch:</label>
+			 		<div class="col-sm-10">
 			 			{{ Form::select('branch_id', $branch_lists, $record->branch_id, ['class' => 'form-control']) }} </br>
 					</div>
 			 	</div>
 				 <div class="form-group">
-					 <label class="col-md-3 control-label">Name:</label>
-					 <div class="col-md-9">
+					 <label class="col-sm-2 control-label" for='name'>Name:</label>
+					 <div class="col-sm-10">
 					 	{{ Form::text('name',$record->name, ['class' => 'form-control']) }} </br>
 					 </div>
 				 </div>
 				 <div class="form-group">
-					 <label class="col-md-3 control-label">Capacity:</label>
-					 <div class="col-md-9">
+					 <label class="col-sm-2 control-label" for='capacity'>Capacity:</label>
+					 <div class="col-sm-10">
 					 	{{ Form::selectRange('capacity', 1, 20,$record->capacity, ['class' => 'form-control']) }} </br>
 					 </div>
 				 </div>
-			 	<div class="form-group">
-			 		<div class="col-md-6 col-md-offset-6">
-			 			<button type="submit" class="btn btn-success btn-block">{{trans('view.save') }}</button>
-			 			<a class="btn btn-success btn-block" href="{{ route('rooms.index') }}">{{trans('view.cancel')}}</a>
-			 		</div>
-			 	</div>
-			 <!--</form>-->
-			 {!! Form::close() !!}
- 		</div> 
- 	</div>
- </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+              	<button type="submit" class="btn btn-info pull-right">{{trans('view.save') }}</button>
+			 	<a class="btn btn-default" href="{{ route('rooms.index') }}">{{trans('view.cancel')}}</a>
+              </div>
+              <!-- /.box-footer -->
+            {!! Form::close()!!}
+		</div>
 @endsection
