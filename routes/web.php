@@ -27,6 +27,8 @@ Route::group(['middlewareGroups' => ['web']], function () {
 	//Room Routing
 	Route::resource('rooms','RoomsController');
 	Route::get('/reportRoom/{id}', 'RoomsController@report');//Test Report Room
+	//School Routing
+	Route::resource('schools','SchoolController');
 	/*Route::get('/editRoom/{id}','RoomsController@show');//Load data for edit/insert room
 	Route::post('/updateRoom/{id}', 'RoomsController@store');//for update room
 	Route::post('/createRoom/{id}', 'RoomsController@create');//for create room

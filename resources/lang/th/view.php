@@ -22,6 +22,10 @@ return [
     'save' => 'จัดเก็บ',
     'cancel' => 'ยกเลิก',
     'search' => 'ค้นหา',
+    'status '   =>  'สถานะ',
+    'lastupdatedby' => 'แก้ไขโดย',
+    'created_at' => 'วันที่สร้าง',
+    'updated_at' => 'วันที่แก้ไขล่าสุด',
     //ROOMS
     'room_detail' => 'จัดการห้องเรียน',
     'room_edit' => 'แก้ไช รายละเอียดห้อง',
@@ -32,6 +36,18 @@ return [
     'roomname'  =>  'ชื่อ',
     'capacity'  =>  'ความจุ',
     'description'   =>  'รายละเอียด',
-    'status'    =>  'สถานะ',
+    //SCHOOLS
+    'school_detail' => 'จัดการโรงเรียน',
+    'school_edit' => 'แก้ไขข้อมูลโรงเรียน',
+    'school_create' => 'เพิ่ม โรงเรียน',
+    'school' =>  'โรงเรียน',
+    'usercode'  =>  'รหัส',
+    'school_name' =>  'ชื่อ',
+    'contact_email'    =>  'อีเมล์',
+    'contact_phone'    =>  'เบอร์ติดต่อ',
+    'school_course'    =>  'วิชาที่เปิดสอน',
+    'address'  =>  'ที่อยู่',
+    'school_fee' => 'ค่าธรรมเนียม',
 
+    //'description'   =>  'Description',
 ];
