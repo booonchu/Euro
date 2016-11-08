@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolsTable extends Migration
+class CreateSchoolLoyaltyFeeHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateSchoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
+        Schema::create('school_loyalty_fee_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('usercode',10)->unique();
-            $table->string('name',50);
-            $table->string('contact_email',50)->nullable();
-            $table->string('contact_phone',50)->nullable();
-            $table->string('address',2000)->nullable();
-            $table->string('description')->nullable();
-            $table->string('status',10);
+            $table->integer('school_id')->unsigned();
+            $table->dateTime('effective_date');
+            $table->float('loyalty_fee', 8, 2);
             $table->integer('lastupdatedby')->unsigned();
             $table->timestamps();
+            $table->foreign('school_id')->references('id')->on('schools');
             $table->foreign('lastupdatedby')->references('id')->on('users');
         });
     }
@@ -35,6 +32,6 @@ class CreateSchoolsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('schools');
+        Schema::drop('school_loyalty_fee_history');
     }
 }

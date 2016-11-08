@@ -16,21 +16,42 @@ class School extends Model
 						'description',
 						'status',
 						'lastupdatedby',
-						'created_at',
-						'updated_at',
 						];
    protected $appends = [];
 
    /**
     * Get the updated user associated with the school.
     */
-    public function LastUpdateBy()
+    public function getLastUpdateBy()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'lastupdatedby');
     }
 
-    public function GetFee()
+    /**
+     * 
+     */
+    public function LoyaltyFees()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\SchoolLoyaltyFeeHistory','school_id');
+    }
+
+    /**
+     * 
+     */
+    public function getCurrentLoyaltyFee()
+    {
+        return 4;//$this->LoyaltyFees()->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc')->first()->loyalty_fee;
+    }
+
+    /**
+     * 
+     */
+    public  function getHistories()
+    {
+        $record = new RecordHistory();
+        $record->user = $this->getLastUpdateBy->name;
+        $record->action = 'Update';
+        $record->date = $this->updated_at;
+        return $record;
     }
 }

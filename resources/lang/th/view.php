@@ -22,10 +22,11 @@ return [
     'save' => 'จัดเก็บ',
     'cancel' => 'ยกเลิก',
     'search' => 'ค้นหา',
-    'status '   =>  'สถานะ',
+    'status'   =>  'สถานะ',
     'lastupdatedby' => 'แก้ไขโดย',
     'created_at' => 'วันที่สร้าง',
     'updated_at' => 'วันที่แก้ไขล่าสุด',
+    'changehistory' => 'Record History',
     //ROOMS
     'room_detail' => 'จัดการห้องเรียน',
     'room_edit' => 'แก้ไช รายละเอียดห้อง',
@@ -47,7 +48,7 @@ return [
     'contact_phone'    =>  'เบอร์ติดต่อ',
     'school_course'    =>  'วิชาที่เปิดสอน',
     'address'  =>  'ที่อยู่',
-    'school_fee' => 'ค่าธรรมเนียม',
+    'loyalty_fee' => 'ค่าธรรมเนียม',
 
     //'description'   =>  'Description',
 ];

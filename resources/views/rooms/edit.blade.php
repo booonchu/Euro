@@ -16,7 +16,7 @@
     </section>
 @endsection
 @section('content')
-		<div class="box box-info">
+		    <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">
               	@if ($mode === 'U') {{trans('view.room_edit') }}
@@ -57,4 +57,6 @@
               <!-- /.box-footer -->
             {!! Form::close()!!}
 		</div>
+    <!-- /.box-header -->
+    
 @endsection

@@ -27,6 +27,7 @@ return [
     'lastupdatedby' => 'Last Update By',
     'created_at' => 'Created Date',
     'updated_at' => 'Updated Date',
+    'changehistory' => 'Record History',
     //ROOMS
     'room_detail' => 'Rooms Management',
     'room_edit' => 'Edit Room Detials',
@@ -48,7 +49,7 @@ return [
     'contact_phone'    =>  'Phone Contact',
     'school_course'    =>  'Course',
     'address'  =>  'Address',
-    'school_fee' => 'Fee',
+    'loyalty_fee' => 'Loyalty Fee',
     //'description'   =>  'Description',
     
 

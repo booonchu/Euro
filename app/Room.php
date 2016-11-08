@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\RecordHistory;
 
 class Room extends Model
 {
@@ -15,6 +16,15 @@ class Room extends Model
      */
     public function branch()
     {
+        return $this->belongsTo('App\Branch');
+    }
+
+    public function getHistories()
+    {
+        $record = new RecordHistory();
+        $record->user = $this->user;
+        $record->name = '';
+            $record->capacity = '';
         return $this->belongsTo('App\Branch');
     }
 }

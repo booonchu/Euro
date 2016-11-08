@@ -113,6 +113,7 @@ class RoomsController extends Controller
         return view('rooms.edit') 
                     ->with('branch_lists', $branch_lists)
                     ->with('record',$record)
+                    ->wiht('histories',array())
                     ->with('mode','U');//Sent mode 'U' as Edit mode.
     }
 
