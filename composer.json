@@ -9,14 +9,16 @@
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.3.0",
 		"tecnickcom/tcpdf": "^6.2",
-        "backpack/base": "^0.7.5"
+        "backpack/base": "^0.7.6",
+        "backpack/crud": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*"
+        "symfony/dom-crawler": "3.1.*",
+        "backpack/generators": "^1.1"
     },
     "autoload": {
         "classmap": [

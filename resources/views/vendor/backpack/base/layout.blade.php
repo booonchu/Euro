@@ -9,15 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>
-      {{ isset($title) ? $title.' :: '.config('backpack.base.project_name').' Admin' : config('backpack.base.project_name').' Admin' }}
+      {{ isset($title) ? $title.' :: '.config('backpack.base.project_name') : config('backpack.base.project_name') }}
     </title>
 
     @yield('before_styles')
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -28,10 +27,11 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/pace/pace.min.css">
     <link rel="stylesheet" href="{{ asset('vendor/backpack/pnotify/pnotify.custom.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/datatables/jquery.dataTables.min.css">
     <!-- BackPack Base CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('jstree-bootstrap') }}/themes/proton/style.min.css" />
+	
     @yield('after_styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,10 +48,7 @@
       <header class="main-header">
         <!-- Logo -->
         <a href="{{ url('') }}" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini">{!! config('backpack.base.logo_mini') !!}</span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">{!! config('backpack.base.logo_lg') !!}</span>
+			Music School
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -77,60 +74,36 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
          @yield('header')
-
         <!-- Main content -->
-        <section class="content">
-          @if(Session::has('flash_message'))
-            <div class="alert alert-success">
-              {{ Session::get('flash_message') }}
-            </div>
-          @endif
 
-          @if( count($errors) > 0)
-            <div class="alert alert-danger">
-              <strong>Whoops!</strong> There were some errors with yours input.<br><br>
-              <ul>
-                @foreach( $errors->all() as $error)
-                  <li>{{ $error }} </li>
-                @endforeach
-              </ul>
-            </div>
-          @endif
-          
+        <section class="content-header">
+
+		
+        </section>
+		
+        <section class="content">
+
           @yield('content')
 
         </section>
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-
-      <footer class="main-footer">
-        @if (config('backpack.base.show_powered_by'))
-            <div class="pull-right hidden-xs">
-              {{ trans('backpack::base.powered_by') }} <a target="_blank" href="http://laravelbackpack.com">Laravel BackPack</a>
-            </div>
-        @endif
-        {{ trans('backpack::base.handcrafted_by') }} <a target="_blank" href="{{ config('backpack.base.developer_link') }}">{{ config('backpack.base.developer_name') }}</a>.
-      </footer>
     </div>
     <!-- ./wrapper -->
 
 
     @yield('before_scripts')
 
-    <!-- jQuery 2.2.3 -->
-    <!--<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>-->
-    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.3.min.js"><\/script>')</script>
-    <!--<script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')</script>-->
+    <!-- jQuery 2.2.0 -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')</script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('vendor/adminlte') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/pace/pace.min.js"></script>
-    <script src="{{ asset('vendor/adminlte') }}/plugins/datatables/jquery.datatables.min.js"></script>
-    <script src="{{ asset('vendor/adminlte') }}/plugins/datatables/dataTables.bootstrap.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/fastclick/fastclick.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/dist/js/app.min.js"></script>
-    
 
     <!-- page script -->
     <script type="text/javascript">
@@ -152,9 +125,6 @@
             $(this).parents('li').addClass('active');
           }
         });
-        $(document).ready(function(){
-            $('#myTable').dataTable();
-        });
     </script>
 
     @include('backpack::inc.alerts')
@@ -163,5 +133,7 @@
 
     <!-- JavaScripts -->
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+	<script src="/jstree-bootstrap/jstree.min.js"></script>
+	<script src="/js/myapp.js"></script>
 </body>
 </html>
