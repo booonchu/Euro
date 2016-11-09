@@ -21,10 +21,12 @@ class CreateSchoolsTable extends Migration
             $table->string('contact_phone',50)->nullable();
             $table->string('address',2000)->nullable();
             $table->string('description')->nullable();
-            $table->string('status',10);
-            $table->integer('lastupdatedby')->unsigned();
+            $table->string('status',10)->default('ACTIVE');
+            $table->integer('updated_by')->unsigned();
+            $table->integer('created_by')->unsigned();
             $table->timestamps();
-            $table->foreign('lastupdatedby')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

@@ -10,7 +10,11 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
+/*Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
+    var_dump($query->sql);
+    var_dump($query->bindings);
+    var_dump($query->time);
+});*/
 Route::get('/', function () {
     return redirect('admin/dashboard');
 });
@@ -29,6 +33,8 @@ Route::group(['middlewareGroups' => ['web']], function () {
 	Route::get('/reportRoom/{id}', 'RoomsController@report');//Test Report Room
 	//School Routing
 	Route::resource('schools','SchoolController');
+	//School Loyalty Fee History
+	Route::resource('schoolloyaltyfeehistory','SchoolLoyaltyFeeHistoryController');
 	/*Route::get('/editRoom/{id}','RoomsController@show');//Load data for edit/insert room
 	Route::post('/updateRoom/{id}', 'RoomsController@store');//for update room
 	Route::post('/createRoom/{id}', 'RoomsController@create');//for create room

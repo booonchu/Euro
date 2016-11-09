@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\School;
 use App\User;
 use Prologue\Alerts\Facades\Alert;
-use App\RecordHistory;
+use Illuminate\Support\Facades\Auth;
 class SchoolController extends Controller
 {
     /**
@@ -35,8 +35,8 @@ class SchoolController extends Controller
             $record->contact_phone = '';
             $record->address = '';
             $record->description = '';
-            $record->status = '';
-            $record->lastupdatedby = 1;//Need to find from Session
+            //$record->status = '';
+            //$record->updated_by = Auth::id();;//Need to find from Session
             $record->id = 0;
             //$record->branch_id->readonly = 'false';
 
@@ -60,8 +60,9 @@ class SchoolController extends Controller
             $record->contact_phone = $request->contact_phone;
             $record->address = $request->address;
             $record->description = $request->description;
-            $record->status = 'ACTIVE';
-            $record->lastupdatedby = 1;//Need to find from Session
+            //$record->status = 'ACTIVE';
+            $record->created_by = Auth::id();
+            $record->updated_by = Auth::id();//Need to find from Session
             $record->save();
             $request->session()->regenerateToken();
             Alert::success('New record added successfully')->flash();
@@ -77,13 +78,9 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        //
+        //This function don't use for test
         $record = School::find($id);
-        $loyaltyfee = $record->with(['LoyaltyFees' => function ($query) {
-                        $query->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');
-                    }])->first();
-        $comments = $record->LoyaltyFees()->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc')->get();
-        return $record->getCurrentLoyaltyFee();
+        return dd($record->getSystemAuditHistory());
     }
 
     /**
@@ -98,15 +95,13 @@ class SchoolController extends Controller
         $record = School::find($id);
 
         //Prepare Record History
-        $recordHistory = new RecordHistory();
-        $recordHistory->user = $record->getLastUpdateBy->name;//User::where('id',$record->lastupdatedby)->first()->name;
+        /*$recordHistory = new RecordHistory();
+        $recordHistory->user = $record->getLastUpdateBy->name;//User::where('id',$record->updated_by)->first()->name;
         $recordHistory->action = 'Update';
-        $recordHistory->date = $record ->updated_at;
+        $recordHistory->date = $record ->updated_at;*/
 
         return view('schools.edit')
                     ->with('record',$record)
-                    ->with('histories',$record->getHistories())
-                    //->with('histories',$recordHistory)
                     ->with('mode','U');//Sent mode 'U' as Edit mode.
     }
 
@@ -126,7 +121,7 @@ class SchoolController extends Controller
         $record->contact_phone = $request->contact_phone;
         $record->address = $request->address;
         $record->description = $request->description;
-        $record->lastupdatedby = 1;//Need to find from Session
+        $record->updated_by = Auth::id();//Need to find from Session
         $record->save();
         Alert::success('Data updated successfully!')->flash();
 

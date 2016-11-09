@@ -11,7 +11,17 @@ class SchoolLoyaltyFeeHistory extends Model
 						'school_id',
 						'effective_date',
 						'loyalty_fee',
-						'lastupdatedby',
+						'updated_by',
+						'created_by',
 						];
    protected $appends = [];
+
+      /**
+    * Get the updated user associated with the school.
+    */
+    public function CreatedBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
 }

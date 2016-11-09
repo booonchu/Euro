@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\SchoolLoyaltyFeeHistory;
+use \Illuminate\Database\Eloquent\Collection;
 class School extends Model
 {
    protected $table='schools';
@@ -15,7 +16,8 @@ class School extends Model
 						'address',
 						'description',
 						'status',
-						'lastupdatedby',
+						'updated_by',
+                        'created_by',
 						];
    protected $appends = [];
 
@@ -24,34 +26,55 @@ class School extends Model
     */
     public function getLastUpdateBy()
     {
-        return $this->belongsTo('App\User', 'lastupdatedby');
+        return $this->belongsTo('App\User', 'updated_by');
     }
 
     /**
-     * 
+     * Get a current SchoolLoyaltyFeeHistory Record
      */
-    public function LoyaltyFees()
+    public function SchoolLoyaltyFeeCurrent() 
     {
-        return $this->hasMany('App\SchoolLoyaltyFeeHistory','school_id');
+        return  $this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');//->loyalty_fee;//$this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');
     }
 
     /**
-     * 
+     * Get all LoyaltyFeeHistory Record
+     */
+    public function SchoolLoyaltyFeeHistory()
+    {
+        return $this->hasMany('App\SchoolLoyaltyFeeHistory','school_id')->orderBy('effective_date', 'desc');//->whereNotNull('school_id');
+    }
+
+    /**
+     * Get current Loyalty Fee of school
      */
     public function getCurrentLoyaltyFee()
     {
-        return 4;//$this->LoyaltyFees()->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc')->first()->loyalty_fee;
+        $record = $this->SchoolLoyaltyFeeCurrent;
+        if (is_null($record)) {
+            return 0;
+        }
+        return $record->loyalty_fee;
     }
 
     /**
-     * 
+     * Get System Audit History
      */
-    public  function getHistories()
+    public  function getSystemAuditHistory()
     {
+        $c = new Collection;
+
         $record = new RecordHistory();
         $record->user = $this->getLastUpdateBy->name;
         $record->action = 'Update';
         $record->date = $this->updated_at;
-        return $record;
+        $c->add($record);
+
+        $record1 = new RecordHistory();
+        $record1->user = $this->getLastUpdateBy->name;
+        $record1->action = 'Insert';
+        $record1->date = $this->created_at;
+        $c->add($record1);
+        return $c;
     }
 }

@@ -20,16 +20,19 @@
         </tr>
         </thead>
         <tbody>
+            @foreach($record->getSystemAuditHistory() as $key=>$history)
              <tr>
-               <td>{{$histories->user}}</td>
-               <td>{{$histories->date}}</td>
-               <td><span class="label label-warning">{{$histories->action}}</span></td>
+               <td>{{$history->user}}</td>
+               <td>{{$history->date}}</td>
+               <td>
+                @if($history->action === 'Insert')
+                  <span class="label label-success">{{$history->action}}</span>
+                @else
+                  <span class="label label-warning">{{$history->action}}</span>
+                @endif
+                </td>
              </tr>
-        <!--<tr>
-          <td><a href="pages/examples/invoice.html">OR1848</a></td>
-          <td>Samsung Smart TV</td>
-          <td><span class="label label-warning">Pending</span></td>
-        </tr>-->
+             @endforeach
         </tbody>
       </table>
     </div>

@@ -18,10 +18,12 @@ class CreateSchoolLoyaltyFeeHistoryTable extends Migration
             $table->integer('school_id')->unsigned();
             $table->dateTime('effective_date');
             $table->float('loyalty_fee', 8, 2);
-            $table->integer('lastupdatedby')->unsigned();
+            $table->integer('created_by')->unsigned();
+            $table->integer('updated_by')->unsigned();
             $table->timestamps();
             $table->foreign('school_id')->references('id')->on('schools');
-            $table->foreign('lastupdatedby')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

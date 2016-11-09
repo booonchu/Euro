@@ -24,10 +24,12 @@ return [
     'cancel' => 'Cancel',
     'search' => 'Search',
     'status '   =>  'Status',
-    'lastupdatedby' => 'Last Update By',
+    'updated_by' => 'Last Updated By',
+    'created_by' => 'Created By',
     'created_at' => 'Created Date',
     'updated_at' => 'Updated Date',
     'changehistory' => 'Record History',
+    'detail' => 'Detail',
     //ROOMS
     'room_detail' => 'Rooms Management',
     'room_edit' => 'Edit Room Detials',
@@ -51,6 +53,9 @@ return [
     'address'  =>  'Address',
     'loyalty_fee' => 'Loyalty Fee',
     //'description'   =>  'Description',
-    
+    //SchoolLoyaltyFee 
+    'schoolloyalfeehistory' => 'School Loyalty Fee History',
+    'currentloyalfee' => 'Current Loyalty Fee',
+    'effective_date' => 'Effective Date',
 
 ];

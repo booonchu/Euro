@@ -15,7 +15,7 @@ return [
     //Shared
     'action'    =>  'แก้ไข',
     'edit' => 'แก้ไข',
-    'create' => 'สร้าง',
+    'create' => 'เพิ่ม',
     'delete' => 'ลบ',
     'view' => 'ดู',
     'report' => 'รายงาน',
@@ -23,10 +23,12 @@ return [
     'cancel' => 'ยกเลิก',
     'search' => 'ค้นหา',
     'status'   =>  'สถานะ',
-    'lastupdatedby' => 'แก้ไขโดย',
+    'updated_by' => 'แก้ไขโดย',
+    'created_by' => 'สร้างโดย',
     'created_at' => 'วันที่สร้าง',
     'updated_at' => 'วันที่แก้ไขล่าสุด',
     'changehistory' => 'Record History',
+    'detail' => 'รายละเอียด',
     //ROOMS
     'room_detail' => 'จัดการห้องเรียน',
     'room_edit' => 'แก้ไช รายละเอียดห้อง',
@@ -51,4 +53,8 @@ return [
     'loyalty_fee' => 'ค่าธรรมเนียม',
 
     //'description'   =>  'Description',
+    //SchoolLoyaltyFee 
+    'schoolloyalfeehistory' => 'ค่าธรรมเนียมของโรงเรียน',
+    'currentloyalfee' => 'ค่าธรรมเนียมปัจจุบัน',
+    'effective_date' => 'วันที่เริ่มมีผล',
 ];
