@@ -46,6 +46,14 @@ class Student extends Model
         return '<a href="studentsubscription/create">เพิ่ม</a> | <a href="studentsubscription">รายละเอียด</a>';
     }
 	
+	public function getClassLink() {
+        return '<a href="studentsubscription">รายละเอียด</a>';
+    }
+	
+	public function getPaymentLink() {
+        return '<a href="studentsubscription/create">เพิ่ม</a> | <a href="studentsubscription">รายละเอียด</a>';
+    }
+	
 	public function getStatus() {
 		if($this->status == 'ACTIVE')
 			return '<span>ใช้งาน</span>';

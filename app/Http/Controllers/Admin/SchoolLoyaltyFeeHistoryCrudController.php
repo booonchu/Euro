@@ -88,7 +88,7 @@ class SchoolLoyaltyFeeHistoryCrudController extends CrudController {
 		
 		//$this->crud->removeButton('create');
 		$this->crud->removeButton('update');
-		$this->crud->removeButton('delete');
+
         // ------ CRUD ACCESS
         //$this->crud->allowAccess(['list', 'create', 'reorder']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);

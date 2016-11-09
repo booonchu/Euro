@@ -1,7 +1,5 @@
 $(document).ready(function() {
   if ($( "#mytree" ).length ) {
-		
-		
 		$('#mytree').jstree({
         'plugins': ["wholerow", "checkbox"],
         'core': {
@@ -26,6 +24,10 @@ $(document).ready(function() {
 		});
 	}
 	
+	if ($("#tbClass").length ) {
+		$("#tbClass").toggle();
+	}
+	
 	$(".content-header small").hide();
 	$(".content-header .breadcrumb").hide();
 	$(".box-footer .form-group").hide();
@@ -48,4 +50,12 @@ $(document).ready(function() {
 		$("#crudTable").hide();
 	}
 	
+	if ($("#popover").length ) {
+			$('#popover').popover()
+	}
+
 });
+
+function showClass() {
+		$("#tbClass").toggle();
+}

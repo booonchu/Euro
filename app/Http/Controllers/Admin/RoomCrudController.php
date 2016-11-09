@@ -78,6 +78,14 @@ class RoomCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
+			   'label' => "ตารางสอน",
+			   'type' => "model_function",
+			   'function_name' => 'getTimetable', 
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
 			   'label' => "สถานะ", 
 			   'type' => "model_function",
 			   'function_name' => 'getStatus', 

@@ -44,6 +44,10 @@ class Teacher extends Model
         return $this->belongsTo('App\Models\School', 'school_id');
     }
 	
+	public function getTimetable() {
+        return '<a href="https://almsaeedstudio.com/themes/AdminLTE/pages/calendar.html">รายละเอียด</a>';
+    }
+	
 	public function getCourseLink() {
         return '<a href="teachercourse/create">เพิ่ม</a> | <a href="teachercourse">รายละเอียด</a>';
     }

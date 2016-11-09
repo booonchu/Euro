@@ -187,7 +187,15 @@ class TeacherCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
-			   'label' => "วิชาเปิดสอน",
+			   'label' => "ตารางสอน",
+			   'type' => "model_function",
+			   'function_name' => 'getTimetable', 
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
+			   'label' => "วิชาสอน",
 			   'type' => "model_function",
 			   'function_name' => 'getCourseLink', 
 			]

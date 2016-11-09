@@ -84,7 +84,6 @@ class SchoolCourseCostHistoryCrudController extends CrudController {
         // $this->crud->removeButtonFromStack($name, $stack);
 		$this->crud->addButton('top', 'schoolcourse', 'view', 'vendor/backpack/crud/buttons/schoolcourse', 'beginning');
 		$this->crud->removeButton('update');
-		$this->crud->removeButton('delete');
 		
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

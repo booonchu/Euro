@@ -33,6 +33,10 @@ class Room extends Model
 	| FUNCTIONS
 	|--------------------------------------------------------------------------
 	*/
+	public function getTimetable() {
+        return '<a href="https://almsaeedstudio.com/themes/AdminLTE/pages/calendar.html">รายละเอียด</a>';
+    }
+	
 	public function getStatus() {
 		if($this->status == 'ACTIVE')
 			return '<span>ใช้งาน</span>';

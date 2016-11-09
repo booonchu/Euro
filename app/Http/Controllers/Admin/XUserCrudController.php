@@ -50,12 +50,11 @@ class XUserCrudController extends CrudController {
 			
 		$this->crud->addField(
 			[
-				'name' => 'password',
+				'name' => 'status',
 				'label' => "ยืนยันรหัสผ่าน",
 				'type' => 'password',
 			]);
 
-			
 		$this->crud->addField(
 			[
 				'name' => 'firstname',

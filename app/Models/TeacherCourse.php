@@ -17,7 +17,7 @@ class TeacherCourse extends Model
 
 	protected $table = 'teacher_courses';
 	protected $primaryKey = 'id';
-	// public $timestamps = false;
+	public $timestamps = false;
 	// protected $guarded = ['id'];
 	protected $fillable = [
 		'teacher_id',
@@ -31,6 +31,10 @@ class TeacherCourse extends Model
 	| FUNCTIONS
 	|--------------------------------------------------------------------------
 	*/
+	public function courses() {
+        return $this->belongsTo('App\Models\Course', 'course_id');
+    }
+	
 	public function getStatus() {
 		if($this->status == 'ACTIVE')
 			return '<span>ใช้งาน</span>';

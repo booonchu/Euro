@@ -17,7 +17,7 @@ class StudentSubscriptionPayment extends Model
 
 	protected $table = 'student_subscription_payments';
 	protected $primaryKey = 'id';
-	// public $timestamps = false;
+	public $timestamps = false;
 	// protected $guarded = ['id'];
 	protected $fillable = [
 		'student_subscription_id',
@@ -34,11 +34,24 @@ class StudentSubscriptionPayment extends Model
 	| FUNCTIONS
 	|--------------------------------------------------------------------------
 	*/
+	public function getTotalClass() {
+        return '<span>800</span>';
+    }
+	
+	public function getTotalClasswithDiscount() {
+        return '<span>600</span>';
+    }
+	
+	public function getPrint() {
+        return '<a href="#"><i class="fa fa-fw fa-print"></i> พิมพ์</a>';
+    }
+	
+	
 	public function getStatus() {
-		if($this->status == 'ACTIVE')
-			return '<span>ใช้งาน</span>';
+		if($this->status == 'HELD')
+			return '<span>ปกติ</span>';
 		else
-			return '<span>ยกเลิก</span>';
+			return '<span>ยกเลิก</span> | <a id="popover"  href="#" data-container="body"  data-toggle="popover"data-placement="left" data-html="true" data-content="<strong>วันที่ยกเลิก: </strong> 11/11/2559<br><strong>เหตุผล: </strong> กรอกส่วนลดไม่ถูกต้อง">รายละเอียด</a>';
     }
 	
 	/*

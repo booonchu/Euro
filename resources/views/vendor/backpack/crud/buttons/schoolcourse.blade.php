@@ -1,5 +1,5 @@
 <div class="callout callout-info">
-	<h4>School</h4>
+	<h4>โรงเรียน</h4>
 	<div class="row">
 	  <div class="col-md-6"><p><strong>รหัส: </strong>S0001</p></div>
 	  <div class="col-md-6"><p><strong>ค่าธรรมเนียมปัจจุบัน: </strong>5 %</p></div>

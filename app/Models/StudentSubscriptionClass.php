@@ -17,7 +17,7 @@ class StudentSubscriptionClass extends Model
 
 	protected $table = 'student_subscription_classes';
 	protected $primaryKey = 'id';
-	// public $timestamps = false;
+	public $timestamps = false;
 	// protected $guarded = ['id'];
 	protected $fillable = [
 		'school_id',
@@ -37,11 +37,19 @@ class StudentSubscriptionClass extends Model
 	| FUNCTIONS
 	|--------------------------------------------------------------------------
 	*/
+	public function teacher() {
+        return $this->belongsTo('App\Models\Teacher', 'teacher_id');
+    }
+	
+	public function room() {
+        return $this->belongsTo('App\Models\Room', 'room_id');
+    }
+	
 	public function getStatus() {
-		if($this->status == 'ACTIVE')
-			return '<span>ใช้งาน</span>';
+		if($this->status == 'HELD')
+			return '<span>ปกติ</span>';
 		else
-			return '<span>ยกเลิก</span>';
+			return '<span>ยกเลิก</span> | <a id="popover"  href="#" data-container="body"  data-toggle="popover"data-placement="left" data-html="true" data-content="<strong>วันที่ยกเลิก: </strong> 11/11/2559<br><strong>เหตุผล: </strong> ไปต่างประเทศ">รายละเอียด</a>';
     }
 	
 	/*

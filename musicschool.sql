@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `description` varchar(2000) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
   `listorder` smallint(6) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usercode` (`usercode`),
   KEY `name` (`name`),
@@ -67,6 +69,8 @@ CREATE TABLE IF NOT EXISTS `course_categories` (
   `description` varchar(2000) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
   `listorder` smallint(6) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -91,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `holidays` (
   `school_id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `holiday_date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `school_id` (`school_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -117,6 +123,8 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `capacity` tinyint(4) NOT NULL,
   `description` varchar(2000) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `school_id` (`school_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -145,6 +153,8 @@ CREATE TABLE IF NOT EXISTS `schools` (
   `address` varchar(2000) DEFAULT NULL,
   `description` text,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usercode` (`usercode`),
   KEY `name` (`name`)
@@ -168,6 +178,8 @@ CREATE TABLE IF NOT EXISTS `school_courses` (
   `school_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `school_id_course_id` (`school_id`,`course_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -190,6 +202,8 @@ CREATE TABLE IF NOT EXISTS `school_course_cost_history` (
   `school_courses_id` int(10) unsigned NOT NULL,
   `effective_date` datetime NOT NULL,
   `cost` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `school_courses_id` (`school_courses_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -212,6 +226,8 @@ CREATE TABLE IF NOT EXISTS `school_course_saleprice_history` (
   `school_courses_id` int(10) unsigned NOT NULL,
   `effective_date` datetime NOT NULL,
   `saleprice` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `school_courses_id` (`school_courses_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -234,6 +250,8 @@ CREATE TABLE IF NOT EXISTS `school_loyalty_fee_history` (
   `school_id` int(10) unsigned NOT NULL,
   `effective_date` datetime NOT NULL,
   `loyalty_fee` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `school_id` (`school_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -267,10 +285,13 @@ CREATE TABLE IF NOT EXISTS `students` (
   `referrer_phone` varchar(50) DEFAULT NULL,
   `description` text,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usercode` (`usercode`),
   KEY `school_id` (`school_id`),
-  KEY `firstname` (`firstname`)
+  KEY `firstname` (`firstname`),
+  KEY `status` (`status`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
@@ -290,18 +311,25 @@ CREATE TABLE IF NOT EXISTS `student_subscriptions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `student_id` int(10) unsigned NOT NULL,
   `course_id` int(10) unsigned NOT NULL,
-  `registration_date` datetime NOT NULL,
+  `ref` varchar(10) NOT NULL,
   `main_teacher_id` int(10) unsigned NOT NULL,
   `main_room_id` int(10) unsigned NOT NULL,
+  `start_date` date NOT NULL,
   `day` varchar(10) NOT NULL,
   `start_time` time NOT NULL,
   `cost` decimal(10,2) NOT NULL,
   `saleprice` decimal(10,2) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'HELD',
+  `closed_date` datetime DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `ref` (`ref`),
   KEY `student_id` (`student_id`),
-  KEY `course_id` (`course_id`)
+  KEY `course_id` (`course_id`),
+  KEY `status` (`status`),
+  KEY `closed_date` (`closed_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -318,15 +346,22 @@ CREATE TABLE IF NOT EXISTS `student_subscription_classes` (
   `room_id` int(10) unsigned NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
+  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
+  `is_moved` tinyint(1) NOT NULL DEFAULT '0',
   `status` varchar(10) NOT NULL DEFAULT 'HELD',
+  `cancelled_date` datetime DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `student_subscription_id` (`student_subscription_id`),
   KEY `teacher_id` (`teacher_id`),
   KEY `room_id` (`room_id`),
   KEY `school_id` (`school_id`),
   KEY `start_date` (`start_date`),
-  KEY `end_date` (`end_date`)
+  KEY `end_date` (`end_date`),
+  KEY `status` (`status`),
+  KEY `cancelled_date` (`cancelled_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -340,13 +375,16 @@ CREATE TABLE IF NOT EXISTS `student_subscription_payments` (
   `student_subscription_id` int(10) unsigned NOT NULL,
   `ref1` varchar(50) DEFAULT NULL,
   `ref2` varchar(50) DEFAULT NULL,
-  `payment_date` datetime NOT NULL,
   `discount` decimal(10,2) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'HELD',
+  `cancelled_date` datetime DEFAULT NULL,
   `comment` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `payment_date` (`payment_date`),
-  KEY `student_subscription_id` (`student_subscription_id`)
+  KEY `student_subscription_id` (`student_subscription_id`),
+  KEY `status` (`status`),
+  KEY `cancelled_date` (`cancelled_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -359,6 +397,8 @@ CREATE TABLE IF NOT EXISTS `student_subscription_payment_details` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `student_subscription_payment_id` int(10) unsigned NOT NULL,
   `student_subscription_class_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `student_class_id` (`student_subscription_class_id`),
   KEY `student_payment_id` (`student_subscription_payment_id`)
@@ -384,10 +424,13 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `address` varchar(2000) DEFAULT NULL,
   `description` text,
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usercode` (`usercode`),
   KEY `school_id` (`school_id`),
-  KEY `firstname` (`firstname`)
+  KEY `firstname` (`firstname`),
+  KEY `status` (`status`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
@@ -409,6 +452,8 @@ CREATE TABLE IF NOT EXISTS `teacher_courses` (
   `course_id` int(10) unsigned NOT NULL,
   `is_approved` tinyint(1) NOT NULL DEFAULT '0',
   `status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `teacher_id_course_id` (`teacher_id`,`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

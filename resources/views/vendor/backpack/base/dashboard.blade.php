@@ -18,10 +18,10 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <div class="box-title">{{ trans('backpack::base.login_status') }}</div>
+                    <div class="box-title">ยินดีต้อนรับ</div>
                 </div>
 
-                <div class="box-body">{{ trans('backpack::base.logged_in') }}</div>
+                <div class="box-body">คุณเข้าสู่ระบบสำเร็จ</div>
             </div>
         </div>
     </div>
