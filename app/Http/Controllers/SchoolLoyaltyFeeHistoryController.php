@@ -54,7 +54,8 @@ class SchoolLoyaltyFeeHistoryController extends Controller
             $record->save();
             $request->session()->regenerateToken();
             Alert::success('New record added successfully')->flash();
-        return redirect()->route('schoolloyaltyfeehistory.index',['id'=>$request->school_id]);
+            return redirect()->back();
+        //return redirect()->route('schoolloyaltyfeehistory.index',['id'=>$request->school_id]);
     }
 
     /**
@@ -99,6 +100,16 @@ class SchoolLoyaltyFeeHistoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = SchoolLoyaltyFeeHistory::find($id);
+        //Verify Invalid request?
+        if (!is_null($record) && $record->effective_date > \Carbon\Carbon::today()) {
+            $record->delete();
+            Alert::success('Record deleted successfully!')->flash();
+        }
+        else{
+            Alert::error('Cannot deleted this record!')->flash();
+        }
+
+        return redirect()->back();//route('rooms.index');
     }
 }

@@ -25,7 +25,7 @@ return [
     'status'   =>  'สถานะ',
     'updated_by' => 'แก้ไขโดย',
     'created_by' => 'สร้างโดย',
-    'created_at' => 'วันที่สร้าง',
+    'created_at' => 'วันที่ทำรายการ',
     'updated_at' => 'วันที่แก้ไขล่าสุด',
     'changehistory' => 'Record History',
     'detail' => 'รายละเอียด',

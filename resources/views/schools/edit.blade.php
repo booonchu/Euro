@@ -66,6 +66,14 @@
                     {{ Form::textarea('description',$record->description, ['class' => 'form-control','rows' => '3', 'placeholder'=>trans('view.description')]) }} </br>
                   </div>
                 </div>
+                @if ($mode === 'I') 
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for='loyalty_fee'> {{trans('view.loyalty_fee') }}</label>
+                  <div class="col-sm-10">
+                    {{ Form::text('loyalty_fee','0', ['class' => 'form-control']) }} </br>
+                  </div>
+                </div>
+                @endif
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

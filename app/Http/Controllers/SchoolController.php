@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\School;
 use App\User;
+use App\SchoolLoyaltyFeeHistory;
 use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class SchoolController extends Controller
 {
     /**
@@ -54,18 +56,29 @@ class SchoolController extends Controller
     public function store(Request $request)
     {
         $record = new School();
-            $record->usercode = $request->usercode;
-            $record->name = $request->name;
-            $record->contact_email = $request->contact_email;
-            $record->contact_phone = $request->contact_phone;
-            $record->address = $request->address;
-            $record->description = $request->description;
-            //$record->status = 'ACTIVE';
-            $record->created_by = Auth::id();
-            $record->updated_by = Auth::id();//Need to find from Session
-            $record->save();
-            $request->session()->regenerateToken();
-            Alert::success('New record added successfully')->flash();
+        $record->usercode = $request->usercode;
+        $record->name = $request->name;
+        $record->contact_email = $request->contact_email;
+        $record->contact_phone = $request->contact_phone;
+        $record->address = $request->address;
+        $record->description = $request->description;
+        //$record->status = 'ACTIVE'; This field are in defualt value
+        
+        $record->created_by = Auth::id();
+        $record->updated_by = Auth::id();
+        $record->save();
+
+        $feerecord = new SchoolLoyaltyFeeHistory();
+        $feerecord->school_id = $record->id;
+        $feerecord->effective_date = Carbon::today();//A
+        $feerecord->loyalty_fee = $request->loyalty_fee;
+        $feerecord->created_by = Auth::id();
+        $feerecord->updated_by = Auth::id();
+        $feerecord->save();
+
+        //Prevent user twice click()
+        $request->session()->regenerateToken();
+        Alert::success('New record added successfully')->flash();
             //$request->session()->flash('flash_message','New record added successfully');
         return redirect()->route('schools.index');
     }

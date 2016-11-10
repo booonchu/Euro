@@ -27,8 +27,16 @@
               </div>
               {!! Form::open(['route' => ['schoolloyaltyfeehistory.store',$record,$record->id],'method'=>'POST'] ) !!}
               {{ Form::hidden('school_id', $record->id) }}
-              <label for='effective_date'> {{trans('view.effective_date') }}</label>
-              {{ Form::date('effective_date','', ['class' => 'form-control']) }}
+              <div class="form-group">
+                <label> {{trans('view.effective_date') }}</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input id="effective_date" name="effective_date" class="form-control pull-right" type="text">
+                </div>
+                <!-- /.input group -->
+              </div>
               <label for='loyalty_fee'> {{trans('view.loyalty_fee') }}</label>
               {{ Form::number('loyalty_fee','0', ['class' => 'form-control']) }}
               <div class="box-footer">
@@ -47,6 +55,8 @@
                      <th>{{trans('view.loyalty_fee')}}</th>
                      <th>{{trans('view.effective_date')}}</th>
                      <th>{{trans('view.created_by')}}</th>
+                     <th>{{trans('view.created_at')}}</th>
+                     <th></th>
                    </tr>
                    </thead>
                      <tbody>
@@ -54,7 +64,15 @@
                        <tr>
                          <td>{{$feerecord->effective_date}}</td>
                          <td>{{number_format($feerecord->loyalty_fee,2)}}%</td>
-                         <th>{{ $feerecord->CreatedBy->name}}</th>
+                         <td>{{ $feerecord->CreatedBy->name}}</td>
+                         <td>{{ $feerecord->created_at}}</td>
+                         <td>
+                            @if ($feerecord->effective_date > \Carbon\Carbon::today()) 
+                             {!! Form::open(['route' => ['schoolloyaltyfeehistory.destroy',$feerecord->id],'method'=>'DELETE'] ) !!}
+                             <button type="submit" class="btn btn-large btn-success">{{trans('view.delete') }}</button>
+                             {!! Form::close()!!}
+                            @endif
+                         </td>
                        </tr>
                        @endforeach
                      </tbody>
@@ -67,4 +85,15 @@
         </div>
       </div>
 </div>
+@endsection
+@section('after_scripts')
+<script type="text/javascript">
+$(function () {
+//Date picker
+    $('#effective_date').datepicker({
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    });
+});
+</script>
 @endsection

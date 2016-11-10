@@ -34,7 +34,7 @@ class School extends Model
      */
     public function SchoolLoyaltyFeeCurrent() 
     {
-        return  $this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');//->loyalty_fee;//$this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');
+        return  $this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc')->orderBy('created_at','desc');//->loyalty_fee;//$this->hasOne('App\SchoolLoyaltyFeeHistory','school_id')->whereDate('effective_date', '<=', date('Y-m-d'))->orderBy('effective_date', 'desc');
     }
 
     /**
