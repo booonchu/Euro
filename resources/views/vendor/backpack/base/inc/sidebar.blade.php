@@ -20,11 +20,12 @@
           <!-- ==== Recommended place for admin menu items ==== -->
           <!-- ================================================ -->
           <li><a href="{{ url(config('backpack.base.route_prefix').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
-
-
+          <li><a href="{{ route('schools.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.school') }}</span></a></li>
+          <li><a href="{{ route('coursecategories.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.course_category') }}</span></a></li>
+          <li><a href="{{ route('courses.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.course') }}</span></a></li>
           <!-- ======================================= -->
           <li class="header">{{ trans('backpack::base.user') }}</li>
-          <li><a href="{{ route('schools.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.school') }}</span></a></li>
+          
           <li><a href="{{ route('rooms.index') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('view.room') }}</span></a></li>
           <li><a href="{{ url(config('backpack.base.route_prefix').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>
         </ul>

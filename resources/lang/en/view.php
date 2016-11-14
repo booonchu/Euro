@@ -30,6 +30,9 @@ return [
     'updated_at' => 'Updated Date',
     'changehistory' => 'Record History',
     'detail' => 'Detail',
+    'listorder' => 'List Order',
+    'name' => 'Name',
+    'category' => 'Category',
     //ROOMS
     'room_detail' => 'Rooms Management',
     'room_edit' => 'Edit Room Detials',
@@ -42,7 +45,7 @@ return [
     'status'    =>  'Status',
     //SCHOOLS
     'school_detail' => 'Schools Management',
-    'school_edit' => 'Edit School Detials',
+    'school_edit' => 'Edit School Detial',
     'school_create' => 'Create New School',
     'school' =>  'School',
     'usercode'  =>  'Usercode',
@@ -57,5 +60,19 @@ return [
     'schoolloyalfeehistory' => 'School Loyalty Fee History',
     'currentloyalfee' => 'Current Loyalty Fee',
     'effective_date' => 'Effective Date',
+    //Course Category
+    'course_category'=> 'Course Category',
+    'course_category_detail' => 'Schools Management',
+    'course_category_edit'=> 'Edit Course Category',
+    'course_category_create' => 'Create New Course Category',
+    //Course
+    'course' => 'Course',
+    'course_detail' => '',
+    'course_edit'=> 'Edit Course',
+    'course_create' => 'Create New Course',
+    'total_classes' =>  'Total Classes',
+    'class_hours'   =>  'Class Hours',
+    'standard_cost' =>  'Standard Cost',
+    'standard_saleprice'    =>  'Standard Saleprice',
 
 ];

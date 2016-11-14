@@ -30,6 +30,14 @@ class School extends Model
     }
 
     /**
+    * Get the created user associated with the school.
+    */
+    public function getCreatedBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
+    /**
      * Get a current SchoolLoyaltyFeeHistory Record
      */
     public function SchoolLoyaltyFeeCurrent() 
@@ -71,7 +79,7 @@ class School extends Model
         $c->add($record);
 
         $record1 = new RecordHistory();
-        $record1->user = $this->getLastUpdateBy->name;
+        $record1->user = $this->getCreatedBy->name;
         $record1->action = 'Insert';
         $record1->date = $this->created_at;
         $c->add($record1);

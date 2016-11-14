@@ -29,6 +29,7 @@
             @if ($mode === 'U') {!! Form::open(['route' => ['schools.update',$record,$record->id],'method'=>'PUT'] ) !!} 
             @else {!! Form::open(['route' => ['schools.store',$record,$record->id],'method'=>'POST'] ) !!}
             @endif
+              <input name="id" type="hidden" value="{{$record->id}}">
               <div class="box-body">
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for='usercode'> {{trans('view.usercode') }}</label>

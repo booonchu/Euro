@@ -29,6 +29,9 @@ return [
     'updated_at' => 'วันที่แก้ไขล่าสุด',
     'changehistory' => 'Record History',
     'detail' => 'รายละเอียด',
+    'listorder' => 'ลำดับ',
+    'name' => 'ชื่อ',
+    'category' => 'ประเภท',
     //ROOMS
     'room_detail' => 'จัดการห้องเรียน',
     'room_edit' => 'แก้ไช รายละเอียดห้อง',
@@ -57,4 +60,18 @@ return [
     'schoolloyalfeehistory' => 'ค่าธรรมเนียมของโรงเรียน',
     'currentloyalfee' => 'ค่าธรรมเนียมปัจจุบัน',
     'effective_date' => 'วันที่เริ่มมีผล',
+    //Course Category
+    'course_category'=> 'กลุ่มวิชา',
+    'course_category_detail' => '',
+    'course_category_edit'=> 'แก้ไข ข้อมูลกลุ่มวิชา',
+    'course_category_create' => 'เพิ่ม ข้อมูลกลุ่มวิชา',
+    //Course
+    'course'=> 'วิชา',
+    'course_detail' => '',
+    'course_edit'=> 'แก้ไข ข้อมูลวิชา',
+    'course_create' => 'เพิ่ม ข้อมูลวิชา',
+    'total_classes' =>  'จำนวนคาบ',
+    'class_hours'   =>  'ชั่งโมงเรียน',
+    'standard_cost' =>  'ราคาเรียกเก็บมาตรฐาน',
+    'standard_saleprice'    =>  'ราคาเสนอขายมาตรฐาน',
 ];
