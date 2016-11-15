@@ -80,20 +80,20 @@
                   <div class="col-sm-10">
                       <div class="radio">
                           <label>
-                            @if($record->is_non_kawaii === 1) 
-                              <input type="radio" name="is_non_kawaii" id="is_non_kawaii" value="0">
+                            @if($record->is_non_kawai === 1) 
+                              <input type="radio" name="is_non_kawai" id="is_non_kawai" value="0">
                             @else
-                              <input type="radio" name="is_non_kawaii" id="is_non_kawaii" value="0" checked=''>
+                              <input type="radio" name="is_non_kawai" id="is_non_kawai" value="0" checked=''>
                             @endif
-                              Kawaii
+                              {{trans('view.KAWAI') }}
                             </label>
                           <label> 
-                            @if($record->is_non_kawaii === 1) 
-                              <input type="radio" name="is_non_kawaii" id="is_non_kawaii" value="1" checked=''>
+                            @if($record->is_non_kawai === 1) 
+                              <input type="radio" name="is_non_kawai" id="is_non_kawai" value="1" checked=''>
                             @else
-                              <input type="radio" name="is_non_kawaii" id="is_non_kawaii" value="1" >
+                              <input type="radio" name="is_non_kawai" id="is_non_kawai" value="1" >
                             @endif
-                            Non Kawaii
+                              {{trans('view.NONKAWAI') }}
                           </label>
                       </div> 
                   </div>

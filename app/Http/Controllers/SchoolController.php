@@ -9,6 +9,7 @@ use App\SchoolLoyaltyFeeHistory;
 use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Config;
 class SchoolController extends Controller
 {
     /**
@@ -31,15 +32,15 @@ class SchoolController extends Controller
     public function create()
     {
         $record = new School();
-            $record->usercode = '';
+            /*$record->usercode = '';
             $record->name = '';
             $record->contact_email = '';
             $record->contact_phone = '';
             $record->address = '';
-            $record->description = '';
+            $record->description = '';*/
             //$record->status = '';
             //$record->updated_by = Auth::id();;//Need to find from Session
-            $record->id = 0;
+            //$record->id = 0;
             //$record->branch_id->readonly = 'false';
 
         return view('schools.edit')
@@ -62,7 +63,7 @@ class SchoolController extends Controller
         $record->contact_phone = $request->contact_phone;
         $record->address = $request->address;
         $record->description = $request->description;
-        //$record->status = 'ACTIVE'; This field are in defualt value
+        //$record->status = Config::get('constants.STATUS_ACTIVE'); This field are in defualt value
         
         $record->created_by = Auth::id();
         $record->updated_by = Auth::id();
@@ -151,11 +152,11 @@ class SchoolController extends Controller
     public function destroy($id)
     {
         $record = School::find($id); 
-        if ($record->status === 'ACTIVE') {
-            $record->status = 'INACTIVE';
+        if ($record->status === Config::get('constants.STATUS_ACTIVE')) {
+            $record->status = Config::get('constants.STATUS_IN_ACTIVE');
         }
         else{
-            $record->status = 'ACTIVE';
+            $record->status = Config::get('constants.STATUS_ACTIVE');
         }
         $record->save();
         Alert::success('Data updated successfully!')->flash();

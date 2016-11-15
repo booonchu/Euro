@@ -12,6 +12,12 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    //Enum
+    //This section use for UI only don't impact any logic
+    'ACTIVE' => 'ใช้งาน',
+    'INACTIVE' => 'ยกเลิก',
+    'KAWAI' => 'Kawai',
+    'NONKAWAI' => 'Non Kawai',
     //Shared
     'action'    =>  'แก้ไข',
     'edit' => 'แก้ไข',

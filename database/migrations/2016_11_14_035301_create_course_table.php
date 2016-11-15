@@ -20,11 +20,11 @@ class CreateCourseTable extends Migration
             $table->string('name',50);
             $table->integer('total_classes');
             $table->integer('class_hours');
-            $table->boolean('is_non_kawaii')->default(1);
+            $table->boolean('is_non_kawai')->default(1);
             $table->decimal('standard_cost', 10, 2);
             $table->decimal('standard_saleprice', 10, 2);
             $table->string('description',2000)->nullable();
-            $table->string('status',10)->default('ACTIVE');
+            $table->enum('status', [Config::get('constants.STATUS_ACTIVE'), Config::get('constants.STATUS_IN_ACTIVE')]);
             $table->integer('listorder')->unsigned()->default(0);
             $table->integer('updated_by')->unsigned();
             $table->integer('created_by')->unsigned();

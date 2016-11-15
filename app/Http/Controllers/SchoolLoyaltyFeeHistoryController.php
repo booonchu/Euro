@@ -9,7 +9,7 @@ use App\User;
 use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-
+use Config;
 class SchoolLoyaltyFeeHistoryController extends Controller
 {
     /**

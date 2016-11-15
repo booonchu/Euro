@@ -12,7 +12,12 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    //
+    //Enum 
+    //This section use for UI only don't impact any logic
+    'ACTIVE' => 'Active',
+    'INACTIVE' => 'Inactive',
+    'KAWAI' => 'Kawai',
+    'NONKAWAI' => 'Non Kawai',
     //Shared
     'action'    =>  'Action',
     'edit' => 'Edit',
@@ -33,6 +38,7 @@ return [
     'listorder' => 'List Order',
     'name' => 'Name',
     'category' => 'Category',
+
     //ROOMS
     'room_detail' => 'Rooms Management',
     'room_edit' => 'Edit Room Detials',

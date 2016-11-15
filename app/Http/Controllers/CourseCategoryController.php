@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Prologue\Alerts\Facades\Alert;
+use Config;
 class CourseCategoryController extends Controller
 {
     /**
@@ -50,7 +51,7 @@ class CourseCategoryController extends Controller
         $record->name = $request->name;
         $record->description = $request->description;
         $record->listorder = $request->listorder;
-        //$record->status = 'ACTIVE'; This field are in defualt value
+        //$record->status = Config::get('constants.STATUS_ACTIVE'); This field are in defualt value
         
         $record->created_by = Auth::id();
         $record->updated_by = Auth::id();
@@ -119,11 +120,11 @@ class CourseCategoryController extends Controller
     public function destroy($id)
     {
         $record = CourseCategory::find($id); 
-        if ($record->status === 'ACTIVE') {
-            $record->status = 'INACTIVE';
+        if ($record->status === Config::get('constants.STATUS_ACTIVE')) {
+            $record->status = Config::get('constants.STATUS_IN_ACTIVE');
         }
         else{
-            $record->status = 'ACTIVE';
+            $record->status = Config::get('constants.STATUS_ACTIVE');
         }
         $record->save();
         Alert::success('Data updated successfully!')->flash();

@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection;
+use Config;
 class CourseCategory extends Model
 {
    protected $table='course_categories';
@@ -29,7 +30,7 @@ class CourseCategory extends Model
     */
     public static function getListForEdit($coures_category_id)
     {
-        return CourseCategory::where('status','=','ACTIVE')->orWhere('id', $coures_category_id)->orderBy('listorder', 'asc')->pluck('name', 'id');
+        return CourseCategory::where('status','=',Config::get('constants.STATUS_ACTIVE'))->orWhere('id', $coures_category_id)->orderBy('listorder', 'asc')->pluck('name', 'id');
     }
 
 
@@ -38,7 +39,7 @@ class CourseCategory extends Model
     */
     public static function getActiveList()
     {
-        return CourseCategory::where('status','=','ACTIVE')->orderBy('listorder', 'asc')->pluck('name', 'id');
+        return CourseCategory::where('status','=',Config::get('constants.STATUS_ACTIVE'))->orderBy('listorder', 'asc')->pluck('name', 'id');
     }
 
 

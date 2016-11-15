@@ -55,7 +55,7 @@
                       <td>{{$record->standard_saleprice}}</td>
                       <td>{{$record->getCourseType()}}</td>
                       <td>{{$record->listorder}}</td>
-                      <td>{{$record->status}}</td>
+                      <td>{{trans('view.'.$record->status)}}</td>
                       <td>
                        {!! Form::open(['route' => ['courses.destroy',$record->id],'method'=>'DELETE'] ) !!}
                        <a class="btn btn-large btn-success" href="{{ route('courses.edit',$record->id) }}">{{trans('view.edit')}}</a>

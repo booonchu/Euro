@@ -51,7 +51,7 @@
                           <a href="{{ route('schoolloyaltyfeehistory.index',['id' => $record->id,])  }}">{{trans('view.detail')}}</a>
                      </td>
                      <td></td>
-                     <td>{{$record->status}}</td>
+                     <td>{{trans('view.'.$record->status)}}</td>
                      <td>
                        {!! Form::open(['route' => ['schools.destroy',$record->id],'method'=>'DELETE'] ) !!}
                        <a class="btn btn-large btn-success" href="{{ route('schools.edit',$record->id) }}">{{trans('view.edit')}}</a>

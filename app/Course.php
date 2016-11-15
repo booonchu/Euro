@@ -13,7 +13,7 @@ class Course extends Model
 						'name',
 						'total_classes',
 						'class_hours',
-						'is_non_kawaii',
+						'is_non_kawai',
 						'standard_cost',
 						'standard_saleprice',
 						'description',
@@ -27,9 +27,9 @@ class Course extends Model
     */
     public function getCourseType()
     {
-    	if($this->is_non_kawaii === 1)
-    		return 'Non Kawii';
-        return 'Kawii';;
+    	if($this->is_non_kawai === 1)
+    		return trans('view.NONKAWAI');
+        return trans('view.KAWAI');
     }
 
 	/**

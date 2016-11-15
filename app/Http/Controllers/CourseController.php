@@ -8,6 +8,7 @@ use App\Course;
 use App\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Prologue\Alerts\Facades\Alert;
+use Config;
 class CourseController extends Controller
 {
     /**
@@ -33,7 +34,7 @@ class CourseController extends Controller
         //$record->id = 0;
         $record->total_classes = 1;
         $record->class_hours = 1;
-        $record->is_non_kawaii = 0;
+        $record->is_non_kawai = 0;
         $record->standard_cost = 100;
         $record->standard_saleprice = 0;
 
@@ -58,7 +59,7 @@ class CourseController extends Controller
         $record->name = $request->name;
         $record->total_classes = $request->total_classes;
         $record->class_hours = $request->class_hours;
-        $record->is_non_kawaii = $request->is_non_kawaii;
+        $record->is_non_kawai = $request->is_non_kawai;
         $record->standard_cost = $request->standard_cost;
         $record->standard_saleprice = $request->standard_saleprice;
         $record->description = $request->description;
@@ -117,7 +118,7 @@ class CourseController extends Controller
         $record->name = $request->name;
         $record->total_classes = $request->total_classes;
         $record->class_hours = $request->class_hours;
-        $record->is_non_kawaii = $request->is_non_kawaii;
+        $record->is_non_kawai = $request->is_non_kawai;
         $record->standard_cost = $request->standard_cost;
         $record->standard_saleprice = $request->standard_saleprice;
         $record->description = $request->description;
@@ -140,11 +141,11 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $record = Course::find($id); 
-        if ($record->status === 'ACTIVE') {
-            $record->status = 'INACTIVE';
+        if ($record->status === Config::get('constants.STATUS_ACTIVE')) {
+            $record->status = Config::get('constants.STATUS_IN_ACTIVE');
         }
         else{
-            $record->status = 'ACTIVE';
+            $record->status = Config::get('constants.STATUS_ACTIVE');
         }
         $record->save();
         Alert::success('Data updated successfully!')->flash();

@@ -12,7 +12,7 @@ use TCPDF;
 use Illuminate\Http\Response;
 use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Input;
-
+use Config;
 class RoomsController extends Controller
 {
     /**
