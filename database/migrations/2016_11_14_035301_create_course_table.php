@@ -24,7 +24,7 @@ class CreateCourseTable extends Migration
             $table->decimal('standard_cost', 10, 2);
             $table->decimal('standard_saleprice', 10, 2);
             $table->string('description',2000)->nullable();
-            $table->enum('status', [Config::get('constants.STATUS_ACTIVE'), Config::get('constants.STATUS_IN_ACTIVE')]);
+            $table->enum('status', [config('constants.STATUS_ACTIVE'), config('constants.STATUS_IN_ACTIVE')]);
             $table->integer('listorder')->unsigned()->default(0);
             $table->integer('updated_by')->unsigned();
             $table->integer('created_by')->unsigned();

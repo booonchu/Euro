@@ -21,8 +21,8 @@ class CreateSchoolsTable extends Migration
             $table->string('contact_phone',50)->nullable();
             $table->string('address',2000)->nullable();
             $table->string('description')->nullable();
-            $table->enum('status', [Config::get('constants.STATUS_ACTIVE'), Config::get('constants.STATUS_IN_ACTIVE')]);
-            //$table->string('status',10)->default(Config::get('constants.STATUS_ACTIVE'));
+            $table->enum('status', [config('constants.STATUS_ACTIVE'), config('constants.STATUS_IN_ACTIVE')]);
+            //$table->string('status',10)->default(config('constants.STATUS_ACTIVE'));
             $table->integer('updated_by')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->timestamps();

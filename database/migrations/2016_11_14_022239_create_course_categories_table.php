@@ -17,7 +17,7 @@ class CreateCourseCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name',50)->unique();
             $table->string('description',2000)->nullable();
-            $table->enum('status', [Config::get('constants.STATUS_ACTIVE'), Config::get('constants.STATUS_IN_ACTIVE')]);
+            $table->enum('status', [config('constants.STATUS_ACTIVE'), config('constants.STATUS_IN_ACTIVE')]);
             $table->integer('listorder')->unsigned()->default(0);
             $table->timestamps();
             $table->integer('created_by')->unsigned();

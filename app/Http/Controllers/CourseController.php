@@ -8,7 +8,6 @@ use App\Course;
 use App\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Prologue\Alerts\Facades\Alert;
-use Config;
 class CourseController extends Controller
 {
     /**
@@ -141,11 +140,11 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $record = Course::find($id); 
-        if ($record->status === Config::get('constants.STATUS_ACTIVE')) {
-            $record->status = Config::get('constants.STATUS_IN_ACTIVE');
+        if ($record->status === config('constants.STATUS_ACTIVE')) {
+            $record->status = config('constants.STATUS_IN_ACTIVE');
         }
         else{
-            $record->status = Config::get('constants.STATUS_ACTIVE');
+            $record->status = config('constants.STATUS_ACTIVE');
         }
         $record->save();
         Alert::success('Data updated successfully!')->flash();
