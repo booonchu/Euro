@@ -26,8 +26,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="box-body table-responsive no-padding">
-                 <table class="table table-hover" id="myTable">
+                 <table class="table table-bordered table-hover" id="myTable">
                  <thead>
                  <tr>
                     <th>{{trans('view.usercode')}}</th>
@@ -67,7 +66,6 @@
 
                    </tbody>
                 </table>
-              </div>
             </div>
             <!-- /.box-body -->
           </div>

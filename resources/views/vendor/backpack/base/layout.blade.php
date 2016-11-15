@@ -161,8 +161,16 @@
             $(this).parents('li').addClass('active');
           }
         });
-        $(document).ready(function(){
-            $('#myTable').dataTable();
+        $(function () {
+          $("#example1").DataTable();
+          $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+          });
         });
     </script>
 
