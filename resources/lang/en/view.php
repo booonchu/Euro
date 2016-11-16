@@ -38,7 +38,7 @@ return [
     'listorder' => 'List Order',
     'name' => 'Name',
     'category' => 'Category',
-
+    'current'   => 'Current',
     //ROOMS
     'room_detail' => 'Rooms Management',
     'room_edit' => 'Edit Room Detials',
@@ -80,5 +80,11 @@ return [
     'class_hours'   =>  'Class Hours',
     'standard_cost' =>  'Standard Cost',
     'standard_saleprice'    =>  'Standard Saleprice',
-
+    //SchoolCourse 
+    'school_course' => 'School Course',
+    'cost' => 'Cost',
+    'saleprice' => 'Sale Price',
+    //CostHistory
+    'schoolcoursecosthistory' => 'School Cost History',
+    'currentschoolcoursecost' => 'Current Course Cost',
 ];

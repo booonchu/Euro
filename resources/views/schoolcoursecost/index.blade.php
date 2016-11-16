@@ -2,12 +2,13 @@
 @section('header')
     <section class="content-header">
       <h1>
-        {{ trans('view.schoolloyalfeehistory') }}<small></small>
+        {{ trans('view.schoolcoursecosthistory') }}<small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url(config('backpack.base.route_prefix')) }}">{{ config('backpack.base.project_name') }}</a></li>
         <li><a href="{{ route('schools.index') }}">{{trans('view.school')}}</a></li>
-        <li class="active">{{trans('view.loyalty_fee')}}</li>
+        <li><a href="{{ route('schoolcourses.index',['id' => $record->id]) }}">{{trans('view.school_course')}}</a></li>
+        <li class="active">{{trans('view.schoolcoursecosthistory')}}</li>
       </ol>
     </section>
 @endsection
@@ -22,11 +23,14 @@
                           <b>{{trans('view.usercode').' '}} :</b>{{$record->usercode}}
                         </p>
                         <p>
-                          <b>{{trans('view.currentloyalfee').' '}} :</b><span class="badge bg-green">{{number_format($record->getCurrentLoyaltyFee(),2)}}%</span>
+                          <b>{{trans('view.course').' '}} :</b> {{$schoolcourse->getCourse->name}}
+                        </p>
+                        <p>
+                          <b>{{trans('view.currentschoolcoursecost').' '}} :</b><span class="badge bg-green">{{number_format($schoolcourse->getCurrentCost(),2)}}</span>
                         </p>
               </div>
-              {!! Form::open(['route' => ['schoolloyaltyfeehistory.store',$record,$record->id],'method'=>'POST'] ) !!}
-              {{ Form::hidden('school_id', $record->id) }}
+              {!! Form::open(['route' => ['schoolcoursecosthistory.store',$schoolcourse,$schoolcourse->id],'method'=>'POST'] ) !!}
+              {{ Form::hidden('school_courses_id', $schoolcourse->id) }}
               <div class="form-group">
                 <label> {{trans('view.effective_date') }}</label>
                 <div class="input-group date">
@@ -37,8 +41,8 @@
                 </div>
                 <!-- /.input group -->
               </div>
-              <label for='loyalty_fee'> {{trans('view.loyalty_fee') }}</label>
-              {{ Form::number('loyalty_fee','0', ['class' => 'form-control']) }}
+              <label for='cost'> {{trans('view.cost') }}</label>
+              {{ Form::number('cost','0', ['class' => 'form-control']) }}
               <div class="box-footer">
                 <button type="submit" class="btn btn-info pull-right">{{trans('view.create') }}</button>                 
               </div>
@@ -52,23 +56,23 @@
                    <table class="table table-hover" id="myTable">
                    <thead>
                    <tr>
-                     <th>{{trans('view.loyalty_fee')}}</th>
                      <th>{{trans('view.effective_date')}}</th>
+                     <th>{{trans('view.cost')}}</th>
                      <th>{{trans('view.created_by')}}</th>
                      <th>{{trans('view.created_at')}}</th>
                      <th></th>
                    </tr>
                    </thead>
                      <tbody>
-                      @foreach($record->SchoolLoyaltyFeeHistory as $key=>$feerecord)
+                      @foreach($schoolcourse->SchoolCourseCostHistory as $key=>$costrecord)
                        <tr>
-                         <td>{{$feerecord->effective_date}}</td>
-                         <td>{{number_format($feerecord->loyalty_fee,2)}}%</td>
-                         <td>{{ $feerecord->getCreatedBy->name}}</td>
-                         <td>{{ $feerecord->created_at}}</td>
+                         <td>{{$costrecord->effective_date}}</td>
+                         <td>{{number_format($costrecord->cost,2)}}</td>
+                         <td>{{ $costrecord->getCreatedBy->name}}</td>
+                         <td>{{ $costrecord->created_at}}</td>
                          <td>
-                            @if ($feerecord->effective_date > \Carbon\Carbon::today()) 
-                             {!! Form::open(['route' => ['schoolloyaltyfeehistory.destroy',$feerecord->id],'method'=>'DELETE'] ) !!}
+                            @if ($costrecord->effective_date > \Carbon\Carbon::today()) 
+                             {!! Form::open(['route' => ['schoolcoursecosthistory.destroy',$costrecord->id],'method'=>'DELETE'] ) !!}
                              <button type="submit" class="btn btn-large btn-success">{{trans('view.delete') }}</button>
                              {!! Form::close()!!}
                             @endif

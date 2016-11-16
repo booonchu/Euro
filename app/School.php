@@ -54,6 +54,14 @@ class School extends Model
     }
 
     /**
+     * Get all LoyaltyFeeHistory Record
+     */
+    public function SchoolCourses()
+    {
+        return $this->hasMany('App\SchoolCourse','school_id');//->whereNotNull('school_id');
+    }
+
+    /**
      * Get current Loyalty Fee of school
      */
     public function getCurrentLoyaltyFee()

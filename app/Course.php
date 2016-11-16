@@ -32,6 +32,18 @@ class Course extends Model
         return trans('view.KAWAI');
     }
 
+    /**
+    * Get Course List for school filter not exists in school_courses and retrive status is active only
+    */
+    public static function getListForSchool($school_id)
+    {
+        return Course::
+        whereNotIn('id', function($query) use ($school_id) { $query->select('course_id')
+                      ->from('school_courses')->where('school_id', '=', $school_id); })
+        ->Where('status','=',config('constants.STATUS_ACTIVE'))
+        ->pluck('name', 'id');
+    }
+
 	/**
     * Get the Course Category.
     */

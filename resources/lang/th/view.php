@@ -38,6 +38,7 @@ return [
     'listorder' => 'ลำดับ',
     'name' => 'ชื่อ',
     'category' => 'ประเภท',
+    'current'   => 'ปัจจุบัน',
     //ROOMS
     'room_detail' => 'จัดการห้องเรียน',
     'room_edit' => 'แก้ไช รายละเอียดห้อง',
@@ -80,4 +81,11 @@ return [
     'class_hours'   =>  'ชั่งโมงเรียน',
     'standard_cost' =>  'ราคาเรียกเก็บมาตรฐาน',
     'standard_saleprice'    =>  'ราคาเสนอขายมาตรฐาน',
+    //SchoolCourse 
+    'school_course' => 'วิชาเปิดสอน',
+    'cost' => 'ราคาเรียกเก็บ',
+    'saleprice' => 'ราคาเสนอขาย',
+    //CostHistory
+    'schoolcoursecosthistory' => 'ราคาเรียกเก็บรายวิชา',
+    'currentschoolcoursecost' => 'ราคาเรียกเก็บปัจจุบัน',
 ];

@@ -16,10 +16,10 @@ class SchoolLoyaltyFeeHistory extends Model
 						];
    protected $appends = [];
 
-      /**
+    /**
     * Get the updated user associated with the school.
     */
-    public function CreatedBy()
+    public function getCreatedBy()
     {
         return $this->belongsTo('App\User', 'created_by');
     }

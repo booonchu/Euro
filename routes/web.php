@@ -39,6 +39,10 @@ Route::group(['middlewareGroups' => ['web']], function () {
 	Route::resource('coursecategories','CourseCategoryController');
 	//Course Routing
 	Route::resource('courses','CourseController');
+	//School Loyalty Fee History
+	Route::resource('schoolcourses','SchoolCourseController');
+	//SchoolCourseCostHistoryController
+	Route::resource('schoolcoursecosthistory','SchoolCourseCostHistoryController');
 	/*Route::get('/editRoom/{id}','RoomsController@show');//Load data for edit/insert room
 	Route::post('/updateRoom/{id}', 'RoomsController@store');//for update room
 	Route::post('/createRoom/{id}', 'RoomsController@create');//for create room

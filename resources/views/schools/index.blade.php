@@ -51,7 +51,7 @@
                      <td><span class="badge bg-green">{{number_format($record->getCurrentLoyaltyFee(),2)}}%</span>|
                           <a href="{{ route('schoolloyaltyfeehistory.index',['id' => $record->id,])  }}">{{trans('view.detail')}}</a>
                      </td>
-                     <td></td>
+                     <td><a href="{{ route('schoolcourses.index',['id' => $record->id,])  }}">{{trans('view.detail')}}</a></td>
                      <td>{{trans('view.'.$record->status)}}</td>
                      <td>
                        {!! Form::open(['route' => ['schools.destroy',$record->id],'method'=>'DELETE'] ) !!}

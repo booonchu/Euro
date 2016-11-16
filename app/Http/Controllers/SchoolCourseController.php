@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SchoolLoyaltyFeeHistory;
-use App\School;
-use App\User;
 use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-class SchoolLoyaltyFeeHistoryController extends Controller
+use App\School;
+use App\User;
+use App\Course;
+use App\SchoolCourse;
+use App\SchoolCourseCostHistory;
+use Carbon\Carbon;
+class SchoolCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +25,12 @@ class SchoolLoyaltyFeeHistoryController extends Controller
         if($schoolid === 0) return 'Invalid Argument';
 
         $schoolrecord = School::find($schoolid);
-
-        return view('schoolloyaltyfee.index')->with('record',$schoolrecord);
+        $course_lists = Course::getListForSchool($schoolid);
+        return view('schoolcourses.index')
+                ->with('record',$schoolrecord)
+                ->with('course_lists',$course_lists);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,17 +49,23 @@ class SchoolLoyaltyFeeHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        $record = new SchoolLoyaltyFeeHistory();
+            $record = new SchoolCourse();
             $record->school_id = $request->school_id;
-            $record->effective_date = $request->effective_date;
-            $record->loyalty_fee = $request->loyalty_fee;
+            $record->course_id = $request->course_id;
             $record->created_by = Auth::id();
             $record->updated_by = Auth::id();//Need to find from Session
             $record->save();
+
+            $recordCost = new SchoolCourseCostHistory();
+            $recordCost->school_courses_id = $record->id;
+            $recordCost->cost = $request->cost;
+            $recordCost->effective_date = Carbon::today();//A
+            $recordCost->created_by = Auth::id();
+            $recordCost->save();
+
             $request->session()->regenerateToken();
             Alert::success('New record added successfully')->flash();
             return redirect()->back();
-        //return redirect()->route('schoolloyaltyfeehistory.index',['id'=>$request->school_id]);
     }
 
     /**
@@ -99,16 +110,15 @@ class SchoolLoyaltyFeeHistoryController extends Controller
      */
     public function destroy($id)
     {
-        $record = SchoolLoyaltyFeeHistory::find($id);
-        //Verify Invalid request?
-        if (!is_null($record) && $record->effective_date > \Carbon\Carbon::today()) {
-            $record->delete();
-            Alert::success('Record deleted successfully!')->flash();
+        $record = SchoolCourse::find($id); 
+        if ($record->status === config('constants.STATUS_ACTIVE')) {
+            $record->status = config('constants.STATUS_IN_ACTIVE');
         }
         else{
-            Alert::error('Cannot deleted this record!')->flash();
+            $record->status = config('constants.STATUS_ACTIVE');
         }
-
-        return redirect()->back();//route('rooms.index');
+        $record->save();
+        Alert::success('Data updated successfully!')->flash();
+        return redirect()->back();
     }
 }
