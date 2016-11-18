@@ -19,7 +19,7 @@ class SchoolCourseCostHistoryCrudController extends CrudController {
 		*/
         $this->crud->setModel("App\Models\SchoolCourseCostHistory");
         $this->crud->setRoute("admin/schoolcoursecosthistory");
-        $this->crud->setEntityNameStrings('ราคาเรียกเก็บ', 'ราคาเรียกเก็บ');
+        $this->crud->setEntityNameStrings('ราคามาตรฐาน', 'ราคามาตรฐาน');
 
         /*
 		|--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class SchoolCourseCostHistoryCrudController extends CrudController {
 		$this->crud->addField(
 			[
 				'name' => 'cost',
-				'label' => "ราคาเรียกเก็บ",
+				'label' => "ราคามาตรฐาน",
 				'type' => 'text',
 				'suffix' => "฿",
 			]);
@@ -71,7 +71,7 @@ class SchoolCourseCostHistoryCrudController extends CrudController {
         $this->crud->addColumn(
 			[
 			   'name' => 'cost', 
-			   'label' => "ราคาเรียกเก็บ",
+			   'label' => "ราคามาตรฐาน",
 			]
 		);
 		

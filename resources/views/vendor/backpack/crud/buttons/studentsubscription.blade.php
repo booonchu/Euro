@@ -5,7 +5,7 @@
 	  <div class="col-md-6"></div>
 	</div>
 	<div class="row">
-	  <div class="col-md-6"><p><strong>ชื่อ: </strong>แดง ไบเล่</p></div>
+	  <div class="col-md-6"><p><strong>ชื่อ: </strong>สมคิด เก่งเรียน</p></div>
 	  <div class="col-md-6"></div>
 	</div>
 </div>

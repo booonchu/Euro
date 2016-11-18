@@ -34,7 +34,7 @@ class TeacherAdminCrudController extends CrudController {
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
-$this->crud->addField(
+		$this->crud->addField(
 			[
 				'name' => 'usercode',
 				'label' => "รหัส",
@@ -186,6 +186,14 @@ $this->crud->addField(
 			   'label' => "นามสกุล",
 			]
 		);
+
+        $this->crud->addColumn(
+			[
+			   'label' => "เพศ", 
+			   'type' => "model_function",
+			   'function_name' => 'getSex', 
+			]
+		);
 		
         $this->crud->addColumn(
 			[
@@ -234,6 +242,7 @@ $this->crud->addField(
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
+		$this->crud->addButton('top', 'report', 'view', 'vendor/backpack/crud/buttons/teacheradmin', 'beginning');
 		$this->crud->removeButton('create');
 		$this->crud->removeButton('delete');
 		

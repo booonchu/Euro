@@ -114,6 +114,7 @@ class TeacherCrudController extends CrudController {
 				'type' => 'textarea',
 			]);
 			
+			/*
 		$this->crud->addField(
 			[
 				'name' => 'tree',
@@ -129,7 +130,7 @@ class TeacherCrudController extends CrudController {
 									</ul>
 								</div>'
 			], 'create');
-			
+			*/
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
@@ -154,6 +155,14 @@ class TeacherCrudController extends CrudController {
 			[
 			   'name' => 'lastname', 
 			   'label' => "นามสกุล",
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
+			   'label' => "เพศ", 
+			   'type' => "model_function",
+			   'function_name' => 'getSex', 
 			]
 		);
 		

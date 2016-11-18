@@ -22,7 +22,7 @@
         @if (Auth::guest())
             <li><a href="{{ url(config('backpack.base.route_prefix').'/login') }}"></a></li>
         @else
-			<li><a href="{{ url(config('backpack.base.route_prefix').'/xuser/1/edit') }}"><i class="fa fa-btn fa-user"></i>ข้อมูลส่วนตัว</a></li>
+			<li><a href="{{ url(config('backpack.base.route_prefix').'/xuserprofile/1/edit') }}"><i class="fa fa-btn fa-user"></i>ข้อมูลส่วนตัว</a></li>
             <li><a href="{{ url(config('backpack.base.route_prefix').'/logout') }}"><i class="fa fa-btn fa-sign-out"></i>ออกจากระบบ</a></li>
         @endif
 

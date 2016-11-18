@@ -19,7 +19,7 @@ class StudentSubscriptionClassCrudController extends CrudController {
 		*/
         $this->crud->setModel("App\Models\StudentSubscriptionClass");
         $this->crud->setRoute("admin/studentsubscriptionclass");
-        $this->crud->setEntityNameStrings('คาบเรียน', 'คาบเรียน');
+        $this->crud->setEntityNameStrings('ตารางเรียน', 'ตารางเรียน');
 
         /*
 		|--------------------------------------------------------------------------
@@ -60,6 +60,18 @@ class StudentSubscriptionClassCrudController extends CrudController {
 		$this->crud->addField(
 			[
 				'name' => 'start_date',
+				'label' => "เริ่มวันที่",
+				'type' => 'date_picker',
+			   'date_picker_options' => [
+				  'todayBtn' => true,
+				  'format' => 'dd-mm-yyyy',
+				  'language' => 'en'
+			   ],
+			], 'create');
+			
+		$this->crud->addField(
+			[
+				'name' => 'start_date2',
 				'label' => "วันที่เรียน",
 				'type' => 'date_picker',
 			   'date_picker_options' => [
@@ -67,7 +79,24 @@ class StudentSubscriptionClassCrudController extends CrudController {
 				  'format' => 'dd-mm-yyyy',
 				  'language' => 'en'
 			   ],
-			]);
+			], 'update');
+			
+		$this->crud->addField(
+			[
+				'name'        => 'day',
+				'label'       => 'วันเรียน', 
+				'type'        => 'radio',
+				'options'     => [ 
+									'MON' => "จันทร์",
+									'TUE' => "อังคาร",
+									'WED' => "พูธ",
+									'THU' => "พฤหัส",
+									'FRI' => "ศุกร์",
+									'SAT' => "เสาร์",
+									'SUN' => "อาทิตย์",
+								],
+				'inline'      => true,
+			], 'create');
 			
 		$this->crud->addField(
 			[
@@ -82,6 +111,63 @@ class StudentSubscriptionClassCrudController extends CrudController {
 							</div>'
 			]);
 
+        $this->crud->addField(
+			[
+			   'name' => 'capacity', 
+			   'label' => "จำนวนครั้งเรียน",
+			]
+		, 'create');
+			
+		$this->crud->addField(
+			[
+				'name' => 'saleprice',
+				'type' => 'custom_html',
+				'value' => '<label>ราคาขาย</label>
+								<div class="input-group">
+									<input type="text" class="form-control">
+									<span class="input-group-addon">฿</span>
+								</div>'
+			]);
+			
+		$this->crud->addField(
+			[
+				'name' => 'btnVerfy',
+				'type' => 'custom_html',
+				'value' => '<div class="col-md-4 col-md-offset-4"><button id="btnVerfy"  type="button" class="btn btn-block btn-primary btn-lg" onclick="showClass()">ตรวจสอบ</button></div>'
+			]);
+			
+		$this->crud->addField(
+			[
+				'name' => 'tbClass',
+				'type' => 'custom_html',
+				'value' => '<table id="tbClass" class="table table-bordered">
+								<tbody>
+								<tr>
+								  <th>ครั้งที่</th>
+								  <th>วันที่</th>
+								</tr>
+								<tr>
+								  <td>1</td>
+								  <td>12/11/2559</td>
+								</tr>
+								<tr>
+								  <td>2</td>
+								  <td>19/11/2559</td>
+								</tr>
+								<tr>
+								  <td>3</td>
+								  <td>26/11/2559</td>
+								</tr>
+								<tr>
+								<tr>
+								  <td>4</td>
+								  <td>3/12/2559</td>
+								</tr>
+								</tr>
+							  </tbody>
+							  </table>'
+			], 'create');
+			
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
@@ -99,7 +185,14 @@ class StudentSubscriptionClassCrudController extends CrudController {
         $this->crud->addColumn(
 			[
 			   'name' => 'start_date', 
-			   'label' => "วันที่เรียน",
+			   'label' => "เวลาเรียน (เริ่มต้น)",
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
+			   'name' => 'end_date', 
+			   'label' => "เวลาเรียน (สิ้นสุด)",
 			]
 		);
 		
@@ -140,6 +233,13 @@ class StudentSubscriptionClassCrudController extends CrudController {
 				'label' => 'สถานะเลื่อน',
 				'type' => 'boolean',
 				'options' => [0 => '', 1 => 'เลื่อน']
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
+			   'name' => 'saleprice', 
+			   'label' => "ราคาขาย",
 			]
 		);
 		

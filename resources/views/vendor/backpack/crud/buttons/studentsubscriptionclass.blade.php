@@ -5,7 +5,7 @@
 	  <div class="col-md-6"><p><strong>เลขที่ลงทะเบียน: </strong>0001</p></div>
 	</div>
 	<div class="row">
-	  <div class="col-md-6"><p><strong>ชื่อ: </strong>แดง ไบเล่</p></div>
+	  <div class="col-md-6"><p><strong>ชื่อ: </strong>สมคิด เก่งเรียน</p></div>
 	  <div class="col-md-6"><p><strong>วิชา: </strong>เปียโน เริ่มต้น 1</p></div>
 	</div>
 </div>

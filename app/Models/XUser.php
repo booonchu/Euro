@@ -43,9 +43,9 @@ class XUser extends Model
 	
 	public function getRole() {
 		if($this->role == 'ADMIN')
-			return '<span>Admin</span>';
+			return '<span>ผู้ดูแลระบบ</span>';
 		else
-			return '<span>User</span>';
+			return '<span>ผู้ใช้ทั่วไป</span>';
     }
 	
 	public function getStatus() {
@@ -53,6 +53,13 @@ class XUser extends Model
 			return '<span>ใช้งาน</span>';
 		else
 			return '<span>ยกเลิก</span>';
+    }
+	
+	public function getSex() {
+		if($this->sex == 'MALE')
+			return '<span>ชาย</span>';
+		else
+			return '<span>หญิง</span>';
     }
 	
 	/*

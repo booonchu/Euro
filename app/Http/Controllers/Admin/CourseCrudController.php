@@ -61,14 +61,14 @@ class CourseCrudController extends CrudController {
 		$this->crud->addField(
 			[
 				'name' => 'total_classes',
-				'label' => "จำนวนคาบ",
+				'label' => "จำนวนครั้งเรียน",
 				'type' => 'text',
 			]);
 		
 		$this->crud->addField(
 			[ 
 				'name' => 'class_hours',
-				'label' => "ชั่งโมงเรียน",
+				'label' => "เวลาเรียน/ครั้ง",
 				'type' => 'select_from_array',
 				'options' => ['30' => '30 นาที', '60' => '60 นาที', '90' => '90 นาที', '120' => '120 นาที'],
 				'allows_null' => false
@@ -77,7 +77,7 @@ class CourseCrudController extends CrudController {
 		$this->crud->addField(
 			[
 				'name' => 'standard_cost',
-				'label' => "ราคาเรียกเก็บมาตรฐาน",
+				'label' => "ราคามาตรฐาน (อ้างอิง)",
 				'type' => 'text',
 				'suffix' => "฿",
 			]);
@@ -85,19 +85,19 @@ class CourseCrudController extends CrudController {
 		$this->crud->addField(
 			[
 				'name' => 'standard_saleprice',
-				'label' => "ราคาเสนอขายมาตรฐาน",
+				'label' => "ราคาขาย (อ้างอิง)",
 				'type' => 'text',
 				'suffix' => "฿",
 			]);
 		
 		$this->crud->addField(
 			[
-				'name' => 'is_non_kawaii',
+				'name' => 'is_non_kawai',
 				'label' => 'ประเภท', 
 				'type' => 'radio',
 				'options' => [
-									0 => "Kawaii",
-									1 => "Non Kawaii"
+									0 => "Kawai",
+									1 => "Non Kawai"
 								],
 				'inline' => true,
 			]);
@@ -107,13 +107,6 @@ class CourseCrudController extends CrudController {
 				'name' => 'description',
 				'label' => "รายละเอียด",
 				'type' => 'textarea',
-			]);
-		
-		$this->crud->addField(
-			[
-				'name' => 'listorder',
-				'label' => "ลำดับ",
-				'type' => 'text',
 			]);
 		
         // ------ CRUD COLUMNS
@@ -151,44 +144,23 @@ class CourseCrudController extends CrudController {
         $this->crud->addColumn(
 			[
 			   'name' => 'total_classes', 
-			   'label' => "จำนวนคาบ",
+			   'label' => "จำนวนครั้งเรียน",
 			]
 		);
 		
         $this->crud->addColumn(
 			[
 			   'name' => 'class_hours', 
-			   'label' => "ชั่งโมงเรียน",
+			   'label' => "เวลาเรียน/ครั้ง (นาที)",
 			]
 		);
 		
         $this->crud->addColumn(
 			[
-			   'name' => 'standard_cost', 
-			   'label' => "ราคาเรียกเก็บมาตรฐาน",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'standard_saleprice', 
-			   'label' => "ราคาเสนอขายมาตรฐาน",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-				'name' => 'is_non_kawaii', 
+				'name' => 'is_non_kawai', 
 				'label' => 'ประเภท',
 				'type' => 'boolean',
-				'options' => [0 => 'Kawaii', 1 => 'Non Kawaii']
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'listorder', 
-			   'label' => "ลำดับ",
+				'options' => [0 => 'Kawai', 1 => 'Non Kawai']
 			]
 		);
 		
@@ -207,6 +179,8 @@ class CourseCrudController extends CrudController {
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
+		//$this->crud->addButton('top', 'report', 'view', 'vendor/backpack/crud/buttons/course', 'beginning');
+		//$this->crud->removeButton('create');
 
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

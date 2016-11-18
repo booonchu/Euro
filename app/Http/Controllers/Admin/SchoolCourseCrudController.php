@@ -42,24 +42,24 @@ class SchoolCourseCrudController extends CrudController {
 			   'entity' => 'courses',
 			   'attribute' => 'name', 
 			   'model' => "App\Models\Course" 
-			]);
+			], 'create');
 		
 		$this->crud->addField(
 			[
 				'name' => 'cost',
 				'type' => 'custom_html',
-				'value' => '<label>ราคาเรียกเก็บ</label>
+				'value' => '<label>ราคามาตรฐาน</label>
 								<div class="input-group">
 									<input type="text" class="form-control">
 									<span class="input-group-addon">฿</span>
 								</div>'
-			]);
+			], 'create');
 		
 		$this->crud->addField(
 			[
 				'name' => 'saleprice',
 				'type' => 'custom_html',
-				'value' => '<label>ราคาเสนอขาย</label>
+				'value' => '<label>ราคาขาย</label>
 								<div class="input-group">
 									<input type="text" class="form-control">
 									<span class="input-group-addon">฿</span>
@@ -87,7 +87,7 @@ class SchoolCourseCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
-			   'label' => "ราคาเรียกเก็บ",
+			   'label' => "ราคามาตรฐาน",
 			   'type' => "model_function",
 			   'function_name' => 'getCostLink', 
 			]
@@ -95,9 +95,8 @@ class SchoolCourseCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
-			   'label' => "ราคาเสนอขาย",
-			   'type' => "model_function",
-			   'function_name' => 'getSalepriceLink', 
+			   'name' => 'saleprice', 
+			   'label' => "ราคาขาย",
 			]
 		);
 		
@@ -117,7 +116,6 @@ class SchoolCourseCrudController extends CrudController {
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
 		$this->crud->addButton('top', 'school', 'view', 'vendor/backpack/crud/buttons/school', 'beginning');
-		$this->crud->removeButton('update');
 		
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

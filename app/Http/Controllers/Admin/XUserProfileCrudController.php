@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\StudentRequest as StoreRequest;
-use App\Http\Requests\StudentRequest as UpdateRequest;
+use App\Http\Requests\XUserRequest as StoreRequest;
+use App\Http\Requests\XUserRequest as UpdateRequest;
 
-class StudentCrudController extends CrudController {
+class XUserProfileCrudController extends CrudController {
 
 	public function setUp() {
 
@@ -17,9 +17,9 @@ class StudentCrudController extends CrudController {
 		| BASIC CRUD INFORMATION
 		|--------------------------------------------------------------------------
 		*/
-        $this->crud->setModel("App\Models\Student");
-        $this->crud->setRoute("admin/student");
-        $this->crud->setEntityNameStrings('นักเรียน', 'นักเรียน');
+        $this->crud->setModel("App\Models\XUser");
+        $this->crud->setRoute("admin/xuser");
+        $this->crud->setEntityNameStrings('ผู้ใช้', 'ผู้ใช้');
 
         /*
 		|--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ class StudentCrudController extends CrudController {
 		|--------------------------------------------------------------------------
 		*/
 
-		//$this->crud->setFromDb();
+		// $this->crud->setFromDb();
 
 		// ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
@@ -36,11 +36,28 @@ class StudentCrudController extends CrudController {
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 		$this->crud->addField(
 			[
-				'name' => 'usercode',
-				'label' => "รหัส",
+				'name' => 'username',
+				'label' => "ชื่อผู้ใช้",
 				'type' => 'text',
+				'attributes'  => [
+				   'disabled' => 'true'
+				 ],
 			]);
-		
+			
+		$this->crud->addField(
+			[
+				'name' => 'password',
+				'label' => "รหัสผ่าน",
+				'type' => 'password',
+			]);
+			
+		$this->crud->addField(
+			[
+				'name' => 'status',
+				'label' => "ยืนยันรหัสผ่าน",
+				'type' => 'password',
+			]);
+
 		$this->crud->addField(
 			[
 				'name' => 'firstname',
@@ -57,37 +74,6 @@ class StudentCrudController extends CrudController {
 			
 		$this->crud->addField(
 			[
-				'name' => 'id_card',
-				'label' => "บัตรประชาชน",
-				'type' => 'text',
-			]);
-
-		$this->crud->addField(
-			[
-				'name' => 'birth_date',
-				'label' => "วันเกิด",
-				'type' => 'date_picker',
-			   'date_picker_options' => [
-				  'todayBtn' => true,
-				  'format' => 'dd-mm-yyyy',
-				  'language' => 'en'
-			   ],
-			]);
-			
-		$this->crud->addField(
-			[
-				'name'        => 'sex',
-				'label'       => 'เพศ', 
-				'type'        => 'radio',
-				'options'     => [ 
-									'MALE' => "ชาย",
-									'FEMALE' => "หญิง"
-								],
-				'inline'      => true,
-			]);
-
-		$this->crud->addField(
-			[
 				'name' => 'email',
 				'label' => "อีเมล์",
 				'type' => 'text',
@@ -100,34 +86,6 @@ class StudentCrudController extends CrudController {
 				'type' => 'text',
 			]);
 			
-		$this->crud->addField(
-			[
-				'name' => 'address',
-				'label' => "ที่อยู่",
-				'type' => 'textarea',
-			]);
-		
-		$this->crud->addField(
-			[
-				'name' => 'referrer_name',
-				'label' => "ผู้ปกครอง",
-				'type' => 'text',
-			]);
-			
-		$this->crud->addField(
-			[
-				'name' => 'referrer_phone',
-				'label' => "เบอร์ติดต่อผู้ปกครอง",
-				'type' => 'text',
-			]);
-		
-		$this->crud->addField(
-			[
-				'name' => 'description',
-				'label' => "รายละเอียด/ประวัติ",
-				'type' => 'textarea',
-			]);
-			
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
@@ -135,79 +93,6 @@ class StudentCrudController extends CrudController {
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
         // $this->crud->setColumnsDetails(['column_1', 'column_2'], ['attribute' => 'value']);
-        $this->crud->addColumn(
-			[
-			   'name' => 'usercode', 
-			   'label' => "รหัส",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'firstname', 
-			   'label' => "ชื่อ",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'lastname', 
-			   'label' => "นามสกุล",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'label' => "เพศ", 
-			   'type' => "model_function",
-			   'function_name' => 'getSex', 
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'label' => "อายุ", 
-			   'type' => "model_function",
-			   'function_name' => 'getAge', 
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'id_card', 
-			   'label' => "บัตรประชาชน",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'email', 
-			   'label' => "อีเมล์",
-			]
-		);
-
-        $this->crud->addColumn(
-			[
-			   'name' => 'phone', 
-			   'label' => "เบอร์ติดต่อ",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'label' => "การลงทะเบียน",
-			   'type' => "model_function",
-			   'function_name' => 'getSubscriptionLink', 
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'label' => "สถานะ", 
-			   'type' => "model_function",
-			   'function_name' => 'getStatus', 
-			]
-		);
 		
         // ------ CRUD BUTTONS
         // possible positions: 'beginning' and 'end'; defaults to 'beginning' for the 'line' stack, 'end' for the others;

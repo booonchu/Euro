@@ -59,6 +59,13 @@ class Teacher extends Model
 			return '<span>ยกเลิก</span>';
     }
 	
+	public function getSex() {
+		if($this->sex == 'MALE')
+			return '<span>ชาย</span>';
+		else
+			return '<span>หญิง</span>';
+    }
+	
 	/*
 	|--------------------------------------------------------------------------
 	| RELATIONS

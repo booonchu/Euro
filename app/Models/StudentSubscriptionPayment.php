@@ -35,17 +35,27 @@ class StudentSubscriptionPayment extends Model
 	|--------------------------------------------------------------------------
 	*/
 	public function getTotalClass() {
+        return '<span>4</span>';
+    }
+	
+	public function getTotalSaleClass() {
         return '<span>800</span>';
     }
 	
-	public function getTotalClasswithDiscount() {
-        return '<span>600</span>';
+	public function getOtherSale() {
+        return '<span>200</span>';
+    }
+	
+	public function getTotalSale() {
+        return '<span>920</span>';
     }
 	
 	public function getPrint() {
-        return '<a href="#"><i class="fa fa-fw fa-print"></i> พิมพ์</a>';
+		if($this->status == 'HELD')
+			return '<a href="#"><i class="fa fa-fw fa-print"></i> พิมพ์</a>';
+		else
+			return '';
     }
-	
 	
 	public function getStatus() {
 		if($this->status == 'HELD')

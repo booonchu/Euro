@@ -99,8 +99,8 @@ class XUserCrudController extends CrudController {
 				'label' => 'ตำแหน่ง',
 				'type' => 'radio',
 				'options' => [
-									'USER' => "User",
-									'ADMIN' => "Admin"
+									'USER' => "ผู้ใช้ทั่วไป",
+									'ADMIN' => "ผู้ดูแลระบบ"
 								],
 				'inline' => true, 
 			]);
@@ -130,6 +130,14 @@ class XUserCrudController extends CrudController {
 			[
 			   'name' => 'lastname', 
 			   'label' => "นามสกุล",
+			]
+		);
+		
+        $this->crud->addColumn(
+			[
+			   'label' => "เพศ", 
+			   'type' => "model_function",
+			   'function_name' => 'getSex', 
 			]
 		);
 		

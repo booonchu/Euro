@@ -49,14 +49,6 @@ class CourseCategoryCrudController extends CrudController {
 				'type' => 'textarea',
 			],
 			'both');
-			
-		$this->crud->addField(
-			[
-				'name' => 'listorder',
-				'label' => "ลำดับ",
-				'type' => 'text',
-			],
-			'both');
 		
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
@@ -76,13 +68,6 @@ class CourseCategoryCrudController extends CrudController {
 			[
 			   'name' => 'description', 
 			   'label' => "รายละเอียด",
-			]
-		);
-		
-        $this->crud->addColumn(
-			[
-			   'name' => 'listorder', 
-			   'label' => "ลำดับ",
 			]
 		);
 		

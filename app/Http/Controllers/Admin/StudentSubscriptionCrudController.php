@@ -42,7 +42,7 @@ class StudentSubscriptionCrudController extends CrudController {
 			   'entity' => 'course',
 			   'attribute' => 'name', 
 			   'model' => "App\Models\Course" 
-			]);
+			], 'create');
 
 		$this->crud->addField(
 			[
@@ -77,7 +77,7 @@ class StudentSubscriptionCrudController extends CrudController {
 				  'format' => 'dd-mm-yyyy',
 				  'language' => 'en'
 			   ],
-			]);
+			], 'create');
 			
 		$this->crud->addField(
 			[
@@ -109,6 +109,24 @@ class StudentSubscriptionCrudController extends CrudController {
 							</div>'
 			]);
 
+        $this->crud->addField(
+			[
+			   'name' => 'capacity', 
+			   'label' => "จำนวนครั้งเรียน",
+			]
+		, 'create');
+			
+		$this->crud->addField(
+			[
+				'name' => 'saleprice',
+				'type' => 'custom_html',
+				'value' => '<label>ราคาขาย</label>
+								<div class="input-group">
+									<input type="text" class="form-control">
+									<span class="input-group-addon">฿</span>
+								</div>'
+			]);
+			
 		$this->crud->addField(
 			[
 				'name' => 'btnVerfy',
@@ -158,7 +176,7 @@ class StudentSubscriptionCrudController extends CrudController {
         $this->crud->addColumn(
 			[
 			   'name' => 'ref', 
-			   'label' => "เลขที่ลงทะเบียน",
+			   'label' => "เลขที่",
 			]
 		);
 		
@@ -198,7 +216,7 @@ class StudentSubscriptionCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
-			   'label' => "วันที่เรียน", 
+			   'label' => "วันเรียน", 
 			   'type' => "model_function",
 			   'function_name' => 'getDay', 
 			]
@@ -213,7 +231,7 @@ class StudentSubscriptionCrudController extends CrudController {
 		
         $this->crud->addColumn(
 			[
-			   'label' => "คาบเรียน",
+			   'label' => "ตารางเรียน",
 			   'type' => "model_function",
 			   'function_name' => 'getClassLink', 
 			]
@@ -243,7 +261,7 @@ class StudentSubscriptionCrudController extends CrudController {
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
 		$this->crud->addButton('top', 'studentsubscription', 'view', 'vendor/backpack/crud/buttons/studentsubscription', 'beginning');
-		$this->crud->removeButton('update');
+		//$this->crud->removeButton('update');
 		
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

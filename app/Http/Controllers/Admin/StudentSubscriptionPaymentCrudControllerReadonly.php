@@ -8,7 +8,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\StudentSubscriptionPaymentRequest as StoreRequest;
 use App\Http\Requests\StudentSubscriptionPaymentRequest as UpdateRequest;
 
-class StudentSubscriptionPaymentCrudController extends CrudController {
+class StudentSubscriptionPaymentCrudControllerReadonly extends CrudController {
 
 	public function setUp() {
 
@@ -39,6 +39,9 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
 				'name' => 'ref1',
 				'label' => "เล่มที่",
 				'type' => 'text',
+				'attributes'  => [
+				   'disabled' => 'true'
+				 ],
 			]);
 			
 		$this->crud->addField(
@@ -46,6 +49,9 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
 				'name' => 'ref2',
 				'label' => "เลขที่",
 				'type' => 'text',
+				'attributes'  => [
+				   'disabled' => 'true'
+				 ],
 			]);
 			
 		$this->crud->addField(
@@ -56,32 +62,27 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
 								<table id="tbClass2" class="table table-bordered">
 								<tbody>
 								<tr>
-								  <th></th>
 								  <th>ครั้งที่</th>
 								  <th>วันที่</th>
 								  <th>ราคาขาย</th>
 								</tr>
 								<tr>
-								  <td><input type="checkbox"></td>
 								  <td>1</td>
 								  <td>12/11/2559</td>
 								  <td>200</td>
 								</tr>
 								<tr>
-								  <td><input type="checkbox"></td>
 								  <td>2</td>
 								  <td>19/11/2559</td>
 								  <td>200</td>
 								</tr>
 								<tr>
-								  <td><input type="checkbox"></td>
 								  <td>3</td>
 								  <td>26/11/2559</td>
 								  <td>200</td>
 								</tr>
 								<tr>
 								<tr>
-								  <td><input type="checkbox"></td>
 								  <td>4</td>
 								  <td>3/12/2559</td>
 								  <td>200</td>
@@ -110,45 +111,17 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
 				'label' => "ส่วนลดค่าเรียน",
 				'type' => 'text',
 				'suffix' => "%",
+				'attributes'  => [
+				   'disabled' => 'true',
+				   'value' => '10'
+				 ],
 			]);
 			
 		$this->crud->addField(
 			[
 				'name' => 'tbOther',
 				'type' => 'custom_html',
-				'value' => '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-  เพิ่มรายการขายอื่นๆ
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-								<label>รายการขายอื่นๆ</label>
-								<input type="text" class="form-control">
-								
-								<label>ราคา</label>
-								<div class="input-group">
-									<input type="text" class="form-control">
-									<span class="input-group-addon">฿</span>
-								</div>
-								
-								<label>ส่วนลด</label>
-								<div class="input-group">
-									<input type="text" class="form-control">
-									<span class="input-group-addon">%</span>
-								</div>
-							
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-        <button type="button" class="btn btn-primary">บันทึก</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+				'value' => '
 								<table id="tbOther" class="table table-bordered">
 								<tbody>
 								<tr>
@@ -207,6 +180,9 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
 									'CREDITCARD' => "บัตรเครดิต",
 								],
 				'inline'      => true,
+				'attributes'  => [
+				   'disabled' => 'true'
+				 ],
 			]);
 			
 		$this->crud->addField(
@@ -412,7 +388,7 @@ class StudentSubscriptionPaymentCrudController extends CrudController {
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
 		$this->crud->addButton('top', 'studentsubscriptionclass', 'view', 'vendor/backpack/crud/buttons/studentsubscriptionclass', 'beginning');
-		//$this->crud->removeButton('update');
+		$this->crud->removeButton('update');
 		
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

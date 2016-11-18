@@ -61,6 +61,17 @@ class Student extends Model
 			return '<span>ยกเลิก</span>';
     }
 	
+	public function getSex() {
+		if($this->sex == 'MALE')
+			return '<span>ชาย</span>';
+		else
+			return '<span>หญิง</span>';
+    }
+	
+	public function getAge() {
+		return '<span>16</span>';
+    }
+	
 	/*
 	|--------------------------------------------------------------------------
 	| RELATIONS
